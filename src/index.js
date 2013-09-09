@@ -7,5 +7,6 @@ module.exports = {
 		dot: 0
 	},
 
-	Entity: require('src/core/entity'),
+	Component: require('src/core/component'),
+	Entity: require('src/core/entity')
 };
