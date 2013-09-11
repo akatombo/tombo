@@ -8,5 +8,6 @@ module.exports = {
 	},
 
 	Component: require('src/core/component'),
-	Entity: require('src/core/entity')
+	Entity: require('src/core/entity'),
+	SystemSet: require('src/core/system-set'),
 };
