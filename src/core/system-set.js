@@ -1,26 +1,7 @@
 var enhance = require('enhance');
+var Set = require('src/core/set');
 
-var SystemSet = enhance(Object, function () {
-	/**
-	 * @class SystemSet
-	 * @constructor
-	**/
-	this.constructor = function () {
-		/**
-		 * @property head
-		 * @type {System|null}
-		 * @default null
-		**/
-		this.head = null;
-
-		/**
-		 * @property tail
-		 * @type {System|null}
-		 * @default null
-		**/
-		this.tail = null;
-	};
-
+var SystemSet = enhance(Set, function () {
 	/**
 	 * Add a system, sort by priority
 	 *
@@ -57,62 +38,6 @@ var SystemSet = enhance(Object, function () {
 		}
 
 		return this;
-	};
-
-	/**
-	 * Remove a system
-	 *
-	 * @method remove
-	 * @param {System} system
-	**/
-	this.remove = function (system) {
-		if (this.head === system) {
-			this.head = system.$next;
-		}
-		if (this.tail === system) {
-			this.tail = system.$previous;
-		}
-		if (system.$previous) {
-			system.$previous.$next = system.$next;
-		}
-		if (system.$next) {
-			system.$next.$previous = system.$previous;
-		}
-	};
-
-	/**
-	 * Remove all system
-	 *
-	 * @method clear
-	**/
-	this.clear = function () {
-		var system;
-		while (this.head) {
-			system = this.head;
-			this.head = system.$next;
-
-			system.$previous = system.$next = null;
-		}
-
-		this.tail = null;
-	};
-
-	/**
-	 * get a system with his constructor
-	 *
-	 * @method get
-	 * @param {Function} systemConstructor
-	 * @return {System}
-	**/
-	//http://jsperf.com/instanceof-vs-isprototypeof
-	this.get = function (systemConstructor) {
-		for (var system = this.head; system; system = system.$next) {
-			if (system instanceof systemConstructor) {
-				return system;
-			}
-		}
-
-		return null;
 	};
 });
 
