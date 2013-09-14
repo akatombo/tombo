@@ -9,5 +9,5 @@ module.exports = {
 
 	Component: require('src/core/component'),
 	Entity: require('src/core/entity'),
-	SystemSet: require('src/core/system-set'),
+	SystemSet: require('src/core/system-set')
 };
