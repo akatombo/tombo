@@ -1,8 +1,7 @@
-var augment = require('augment');
+var enhance = require('enhance');
 var Map = require('map');
 
-
-var Entity = augment(Object, function () {
+var Entity = enhance(Object, function () {
 	/**
 	 * @class Entity
 	 * @constructor

@@ -5,14 +5,15 @@
   "version": "0.0.0",
   "keywords": [],
   "dependencies": {
-    "javascript/augment": "*"
+    "wryk/enhance": "*",
+    "component/emitter": "*"
   },
   "development": {},
   "license": "MIT",
   "main": "src/index.js",
   "scripts": [
     "src/index.js",
-    "src/core/component",
-    "src/core/entity"
+    "src/core/component.js",
+    "src/core/entity.js"
   ]
 }

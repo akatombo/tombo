@@ -1,6 +1,6 @@
-var augment = require('augment');
+var enhance = require('enhance');
 
-var SystemSet = augment(Object, function () {
+var SystemSet = enhance(Object, function () {
 	/**
 	 * @class SystemSet
 	 * @constructor
@@ -67,10 +67,10 @@ var SystemSet = augment(Object, function () {
 	**/
 	this.remove = function (system) {
 		if (this.head === system) {
-			this.head = this.head.$next;
+			this.head = system.$next;
 		}
 		if (this.tail === system) {
-			this.tail = this.tail.$previous;
+			this.tail = system.$previous;
 		}
 		if (system.$previous) {
 			system.$previous.$next = system.$next;
@@ -89,7 +89,7 @@ var SystemSet = augment(Object, function () {
 		var system;
 		while (this.head) {
 			system = this.head;
-			this.head = this.head.$next;
+			this.head = system.$next;
 
 			system.$previous = system.$next = null;
 		}

@@ -1,6 +1,6 @@
-var augment = require('augment');
+var enhance = require('enhance');
 
-var Component = augment(Object, function () {
+var Component = enhance(Object, function () {
 	this.constructor = function () {};
 });
 
