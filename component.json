@@ -14,6 +14,9 @@
   "scripts": [
     "src/index.js",
     "src/core/component.js",
-    "src/core/entity.js"
+    "src/core/entity.js",
+    "src/core/set.js",
+    "src/core/system-set.js",
+    "src/core/node-set.js"
   ]
 }

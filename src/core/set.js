@@ -117,12 +117,12 @@ var Set = enhance(Object, function () {
 	 * @return {Set}
 	**/
 	this.swap = function(a, b) {
-		if (a.$previous == b) {
+		if (a.$previous === b) {
 			a.$previous = b.$previous;
 			b.$previous = a;
 			b.$next = a.$next;
 			a.$next = b;
-		} else if (b.$previous == a) {
+		} else if (b.$previous === a) {
 			b.$previous = a.$previous;
 			a.$previous = b;
 			a.$next = b.$next;
@@ -142,7 +142,7 @@ var Set = enhance(Object, function () {
 			this.head = a;
 		}
 
-		if (this.tail == a) {
+		if (this.tail === a) {
 			this.tail = b;
 		} else if (this.tail === b) {
 			this.tail = a;
@@ -172,6 +172,21 @@ var Set = enhance(Object, function () {
 	};
 
 	return {
+		/**
+		 * empty anchor for quick for looping
+		 * @exemple
+		 *		for (var item = items.prehead; item = item.$next;) {}
+		 *		// instead of
+		 *		for (var item = items.head; item; item = item.$next) {}
+		 * @property prehead
+		 * @return {Object}
+		**/
+		get prehead () {
+			var that = this;
+			return {
+				$next: that.head;
+			};
+		},
 		/**
 		 * set length
 		 *
