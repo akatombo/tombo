@@ -68,7 +68,18 @@ var Entity = enhance(Object, function () {
 			this.emit('component:removed', componentConstructor, componentInstance);
 		}
 
-		return component;
+		return componentInstance;
+	};
+
+	/**
+	 * 
+	 *
+	 * @method has
+	 * @param {Function} componentConstructor
+	 * @return {Boolean}
+	**/
+	this.has = function (componentConstructor) {
+		return this._components.has(componentConstructor);
 	};
 
 	/**
@@ -98,17 +109,6 @@ var Entity = enhance(Object, function () {
 		}
 
 		return components;
-	};
-
-	/**
-	 * 
-	 *
-	 * @method get
-	 * @param {Function} componentConstructor
-	 * @return {Boolean}
-	**/
-	this.has = function (componentConstructor) {
-		return this._components.get(componentConstructor);
 	};
 });
 
