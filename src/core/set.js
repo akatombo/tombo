@@ -181,6 +181,7 @@ var Set = enhance(Object, function () {
 		 * @property prehead
 		 * @return {Object}
 		**/
+		// TODO check perf for caching it inside this
 		get prehead () {
 			var that = this;
 			return {

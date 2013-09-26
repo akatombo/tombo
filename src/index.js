@@ -7,7 +7,14 @@ module.exports = {
 		dot: 0
 	},
 
+	Node: require('src/core/node'),
 	Component: require('src/core/component'),
 	Entity: require('src/core/entity'),
-	SystemSet: require('src/core/system-set')
+	System: require('src/core/system'),
+
+	Set: require('src/core/system-set'),
+	NodeSet: require('src/core/node-set'),
+	SystemSet: require('src/core/system-set'),
+
+	ComponentMatchingFamily: require('src/core/component-matching-family')
 };
