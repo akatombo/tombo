@@ -1,9 +1,9 @@
 module.exports = {
 	version: {
-		name: ''
+		name: '',
 		full: '0.0.0',
 		major: 0,
-		minor: 0
+		minor: 0,
 		dot: 0
 	},
 
