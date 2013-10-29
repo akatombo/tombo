@@ -11,13 +11,13 @@
   },
   "development": {},
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "scripts/index.js",
   "scripts": [
-    "src/index.js",
-    "src/core/component.js",
-    "src/core/entity.js",
-    "src/core/set.js",
-    "src/core/system-set.js",
-    "src/core/node-set.js"
+    "scripts/index.js",
+    "scripts/core/component.js",
+    "scripts/core/entity.js",
+    "scripts/core/set.js",
+    "scripts/core/system-set.js",
+    "scripts/core/node-set.js"
   ]
 }
