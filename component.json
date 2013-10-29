@@ -5,19 +5,27 @@
   "version": "0.0.0",
   "keywords": [],
   "dependencies": {
-    "wryk/enhance": "*",
-    "component/emitter": "*",
-    "wryk/object-pool": "*"
+    "wryk/enhance": "0.2.0",
+    "component/emitter": "1.1.0",
+    "wryk/object-pool": "0.2.1",
+    "component/indexof": "0.0.1"
   },
   "development": {},
   "license": "MIT",
   "main": "scripts/index.js",
   "scripts": [
     "scripts/index.js",
+    "scripts/core/component-matching-family.js",
     "scripts/core/component.js",
     "scripts/core/entity.js",
+    "scripts/core/node-set.js",
+    "scripts/core/node.js",
     "scripts/core/set.js",
     "scripts/core/system-set.js",
-    "scripts/core/node-set.js"
-  ]
+    "scripts/core/system.js"
+  ],
+  "files": [],
+  "styles": [],
+  "images": [],
+  "templates": []
 }
