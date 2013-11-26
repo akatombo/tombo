@@ -6,7 +6,7 @@ var Entity = enhance(Object, function () {
 	 * @class Entity
 	 * @constructor
 	**/
-	this.constructor = function ()
+	this.constructor = function () {
 		/**
 		 * Contains all components attached to the entity
 		 *

@@ -1,10 +1,29 @@
 {
   "name": "tombo",
   "version": "0.0.0",
+  "main": "scripts/index",
   "devDependencies": {
+    "chai": "~1.8.1",
     "component": "~0.17.0",
+    "component-assets": "0.0.2",
+    "jshint": "~2.3.0",
     "LiveScript": "~1.2.0",
     "mocha": "~1.12.0",
-    "should": "~1.2.2"
+    "uglify-js": "~2.4.3",
+    "yuidocjs": "~0.3.46"
+  },
+  "scripts": {
+    "build-component-assets": "component-assets scripts:scripts/**/*.js json:component.json",
+    "build-component-development": "npm run build-component-assets && component-build --dev --standalone akatombo --name index",
+    "build-component-production": "npm run build-component-assets && component-build --standalone akatombo --name akatombo --out . && npm run minify",
+    "build": "npm run build-component-production && npm run doc",
+    "clean": "rm -rf build akatombo.js akatombo.min.js",
+    "clean-deep": "rm -rf components node_modules && npm run clean",
+    "doc": "echo doc task unimplemented",
+    "lint": "",
+    "minify": "uglifyjs akatombo.js --output akatombo.min.js",
+    "install": "component install",
+    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75 --bail",
+    "watch": "echo watch task unimplemented"
   }
 }

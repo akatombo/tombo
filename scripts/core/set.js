@@ -185,7 +185,7 @@ var Set = enhance(Object, function () {
 		get prehead () {
 			var that = this;
 			return {
-				$next: that.head;
+				$next: that.head
 			};
 		},
 		/**
