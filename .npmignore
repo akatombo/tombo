@@ -1,6 +1,7 @@
 build
 components
 node_modules
+old_scripts
 test
 .gitignore
 .smonignore
