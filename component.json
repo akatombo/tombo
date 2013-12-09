@@ -3,12 +3,17 @@
   "repo": "akatombo/tombo",
   "description": "entity system game engine",
   "version": "0.0.0",
-  "keywords": [],
+  "keywords": [
+    "entity",
+    "system",
+    "game",
+    "engine"
+  ],
   "dependencies": {
     "wryk/enhance": "0.2.0",
-    "component/emitter": "1.1.0",
-    "wryk/object-pool": "0.2.1",
-    "component/indexof": "0.0.1"
+    "component/emitter": "1.1.1",
+    "wryk/hash": "1.0.0",
+    "wryk/map": "1.0.0"
   },
   "development": {},
   "license": "MIT",

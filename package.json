@@ -14,16 +14,14 @@
   },
   "scripts": {
     "build-component-assets": "component-assets scripts:scripts/**/*.js json:component.json",
-    "build-component-development": "npm run build-component-assets && component-build --dev --standalone akatombo --name index",
-    "build-component-production": "npm run build-component-assets && component-build --standalone akatombo --name akatombo --out . && npm run minify",
+    "build-component-development": "npm run build-component-assets && component-build --dev --standalone tombo --name index",
+    "build-component-production": "npm run build-component-assets && component-build --standalone tombo --name tombo --out . && uglifyjs tombo.js --output tombo.min.js",
     "build": "npm run build-component-production && npm run doc",
-    "clean": "rm -rf build akatombo.js akatombo.min.js",
+    "clean": "rm -rf build tombo.js tombo.min.js",
     "clean-deep": "rm -rf components node_modules && npm run clean",
-    "doc": "echo doc task unimplemented",
+    "doc": "",
     "lint": "",
-    "minify": "uglifyjs akatombo.js --output akatombo.min.js",
     "install": "component install",
-    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75 --bail",
-    "watch": "echo watch task unimplemented"
+    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75 --bail"
   }
 }
