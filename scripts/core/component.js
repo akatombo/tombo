@@ -1,7 +1,14 @@
-var enhance = require('enhance');
+/**
+ * @class Component
+ * @constructor
+**/
+function Component (object) {
+	for (var key in object) {
+		if (object.hasOwnProperty(key)) {
+			this[key] = object[key];
+		}
+	}
+}
 
-var Component = enhance(Object, function () {
-	this.constructor = function () {};
-});
 
 module.exports = Component;
