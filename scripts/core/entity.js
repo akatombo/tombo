@@ -10,8 +10,8 @@ var Entity = enhance(Object, function () {
 		/**
 		 * Contains all components attached to the entity
 		 *
-		 * @private
 		 * @property _components
+		 * @private
 		 * @type {Map}
 		 * @default new Map()
 		**/
@@ -24,7 +24,7 @@ var Entity = enhance(Object, function () {
 	 *
 	 * @event component:added
 	 * @param {Function} componentConstructor Constructor of the added component
-	 * @param {Component} componentInstance The added component
+	 * @param {Component} component The added component
 	**/
 
 	/**
@@ -32,7 +32,7 @@ var Entity = enhance(Object, function () {
 	 *
 	 * @event component:removed
 	 * @param {Function} componentConstructor Constructor of the removed component
-	 * @param {Component} componentInstance The removed component
+	 * @param {Component} component The removed component
 	**/
 	require('emitter')(this);
 
@@ -42,13 +42,13 @@ var Entity = enhance(Object, function () {
 	 * @method add
 	 * @chainable
 	 * @param {Function} componentConstructor
-	 * @param {Component} componentInstance
+	 * @param {Component} component
 	 * @return {Entity}
 	**/
-	this.add = function (componentConstructor, componentInstance) {
-		this._components.set(componentConstructor, componentInstance);
+	this.add = function (componentConstructor, component) {
+		this._components.set(componentConstructor, component);
 
-		this.emit('component:added', componentConstructor, componentInstance);
+		this.emit('component:added', componentConstructor, component);
 
 		return this;
 	};
@@ -58,21 +58,20 @@ var Entity = enhance(Object, function () {
 	 *
 	 * @method remove
 	 * @param {Function} componentConstructor
-	 * @return {Component|null}
+	 * @return {Component|false}
 	**/
 	this.remove = function (componentConstructor) {
-		var componentInstance = this._components.get(componentConstructor);
-		
-		if (componentInstance) {
-			this._components.delete(componentConstructor);
-			this.emit('component:removed', componentConstructor, componentInstance);
-		}
+		var component = this._components.get(componentConstructor);
+		var deleted = this._components.delete(componentConstructor);
 
-		return componentInstance;
+		return deleted
+			? this.emit('component:removed', componentConstructor, component) && component
+			: false
+		;
 	};
 
 	/**
-	 * 
+	 * Check if has component with his constructor
 	 *
 	 * @method has
 	 * @param {Function} componentConstructor
