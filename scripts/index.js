@@ -1,4 +1,4 @@
-var version = require('../component.json').version;
+var version = '0.0.0';
 var parts = version.split('.');
 
 module.exports = {
@@ -10,11 +10,11 @@ module.exports = {
 	},
 
 	Component: require('./core/component'),
-	ComponentMatchingFamily: require('./core/component-matching-family'),
+	// ComponentMatchingFamily: require('./core/component-matching-family'),
 	Entity: require('./core/entity'),
-	Node: require('./core/node'),
-	NodeSet: require('./core/node-set'),
-	Set: require('./core/system-set'),
-	System: require('./core/system'),
-	SystemSet: require('./core/system-set')
+	// Node: require('./core/node'),
+	// NodeSet: require('./core/node-set'),
+	// Set: require('./core/system-set'),
+	// System: require('./core/system'),
+	// SystemSet: require('./core/system-set')
 };
