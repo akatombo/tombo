@@ -1,6 +1,7 @@
 /**
  * @class Component
  * @constructor
+ * @param {Object} object
 **/
 function Component (object) {
 	for (var key in object) {
