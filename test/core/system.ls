@@ -1,7 +1,2 @@
-var enhance = require('enhance');
-
-var System = enhance(Object, function () {
-	
-});
-
-module.exports = System;
+should = require 'chai' .should!
+{ System } = require '../../build/'

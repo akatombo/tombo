@@ -1,2 +1,2 @@
 should = require 'chai' .should!
-{ Node } = require '../build/'
+{ Node } = require '../../build/'

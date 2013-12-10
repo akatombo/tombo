@@ -1,2 +1,2 @@
 should = require 'chai' .should!
-{ SystemSet } = require '../build/'
+{ SystemSet } = require '../../build/'

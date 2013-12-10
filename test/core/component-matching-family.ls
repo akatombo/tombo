@@ -1,2 +1,2 @@
 should = require 'chai' .should!
-{ ComponentMatchingFamily } = require '../build/'
+{ ComponentMatchingFamily } = require '../../build/'
