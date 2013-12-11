@@ -3,6 +3,7 @@
 **/
 
 var Map = require('map');
+var uid = require('uid');
 
 module.exports = require('enhance')(Object, function () {
 	/**
@@ -19,6 +20,15 @@ module.exports = require('enhance')(Object, function () {
 		 * @default new Map()
 		**/
 		this._components = new Map();
+
+		/**
+		 * entity unique identifier
+		 *
+		 * @property uid
+		 * @readonly
+		 * @type {String}
+		**/
+		this.uid = uid();
 	};
 
 
