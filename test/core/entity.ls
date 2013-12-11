@@ -1,68 +1,68 @@
 should = require 'chai' .should!
-{ Entity } = require '../build/'
+{ Entity, Component } = require '../../build/'
 
-
+Position = Component.enhance!
 Heroe = Component.enhance!
-Sister = Component.enhance!
-Koyomi = Component.enhance!
+Life = Component.enhance!
+
+position = new Position!
+heroe = new Heroe!
+life = new Life!
 
 describe 'new Entity()' !->
 	entity = new Entity!
+	entity.add new Position!
 
-	describe '#add(componentConstructor, component)' (...) !->
-		it "should emit component:added event with componentConstructor and component" !->
-			heroe = new Heroe!
+	describe '#add(component)' (...) !->
+		it "should add or overwrite an component entry" !->
+			heroe2 = new Heroe!
+			entity.add heroe2
+			entity.get Heroe .should.be.equal heroe2
 
-			entity.once 'component:added' (componentConstructor, component) ->
-				componentConstructor.should.be.equal Heroe
-   				component.should.be.equal heroe
+			entity.add heroe
+			entity.get Heroe .should.be.equal heroe
 
-   			entity.add Heroe, heroe
+		it "should emit component:added event with component and componentConstructor" !->
+			entity.once 'component:added' (component, component-constructor) ->
+				component.should.be.equal heroe
+				component-constructor.should.be.equal Heroe
 
-   		it "should return this" !->
-			entity.add Heroe, new Heroe! .should.be.equal entity
+			entity.add heroe
+
+
+		it "is chainable" !->
+			entity.add heroe .should.be.equal entity
 
 	describe '#remove(componentConstructor)' (...) !->
-        defined-component = entity.get Heroe
-        var removed-component
-        var returned-component
-        
-		it "should emit component:remove event with componentConstructor" !->
-			entity.once 'component:remove' (component-constructor, component) ->
-				componentConstructor.should.be.equal Heroe
-				component.should.be.equal defined-component
+		it "should emit component:remove event with component and componentConstructor" !->
+			entity.once 'component:remove' (component, component-constructor) ->
+				component.should.be.equal life
+				component-constructor.should.be.equal Life
 				
-				removed-component := component
+			entity.add life
+			entity.remove Life
 
-			returned-component := entity.remove Heroe
-
-		it "should return removed component" !->
-		    returned-component.should.be.equal removed-component
+		it "should return removed component or false is component doesn't exist" !->
+			entity.add life
+			entity.remove Life .should.be.equal life
+			entity.remove Life .should.be.false
 
 	describe '#has(componentConstructor)' (...) !->
-		sister = new Sister!
-		entity.add Sister, sister
-		it "should return true" !->
-			entity.has Sister .should.be.true
+		it "should return true with defined component-constructor" !->
+			entity.has Position .should.be.true
 
-		it "should return false" !->
-			entity.has Heroe .should.be.false
+		it "should return false with undefined component-constructor" !->
+			entity.has Life .should.be.false
 
 	describe '#get(componentConstructor)' (...) !->
-		koyomi = new Koyomi
-		entity.add Koyomi, koyomi
-		it "should return compoment is defined"
-			entity.get Koyomi .should.be.equal koyomi
+		it "should return component is defined" !->
+			entity.add life
+			entity.get Life .should.be.equal life
+
 
 	describe '#getAll()' (...) !->
-		koyomi = new Koyomi
-		sister = new Sister
-		heroe = new Heroe
-		entity.add Koyomi, koyomi
-		entity.add Sister, sister
-		entity.add Heroe, heroe
-		it "should return array of all compoment "
-			array = entity.getAll! 
-			array .should.be.include koyomi
-			array .should.be.include sister
-			array .should.be.include heroe
+		it "should return an array of all component" !->
+			all-components = entity.getAll!
+
+			all-components.forEach (component) !->
+				entity.has component.constructor .should.be.true

@@ -10,7 +10,7 @@
     "engine"
   ],
   "dependencies": {
-    "wryk/enhance": "0.2.0",
+    "wryk/enhance": "1.0.0",
     "component/emitter": "1.1.1",
     "wryk/hash": "1.0.0",
     "wryk/map": "1.0.0"

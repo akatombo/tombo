@@ -23,16 +23,16 @@ var Entity = enhance(Object, function () {
 	 * Fired when a component is added
 	 *
 	 * @event component:added
-	 * @param {Function} componentConstructor Constructor of the added component
 	 * @param {Component} component The added component
+	 * @param {Function} componentConstructor Constructor of the added component
 	**/
 
 	/**
 	 * Fired when a component is removed
 	 *
 	 * @event component:removed
-	 * @param {Function} componentConstructor Constructor of the removed component
 	 * @param {Component} component The removed component
+	 * @param {Function} componentConstructor Constructor of the removed component
 	**/
 	require('emitter')(this);
 
@@ -41,14 +41,14 @@ var Entity = enhance(Object, function () {
 	 *
 	 * @method add
 	 * @chainable
-	 * @param {Function} componentConstructor
 	 * @param {Component} component
 	 * @return {Entity}
 	**/
-	this.add = function (componentConstructor, component) {
+	this.add = function (component) {
+		componentConstructor = component.constructor;
 		this._components.set(componentConstructor, component);
 
-		this.emit('component:added', componentConstructor, component);
+		this.emit('component:added', component, componentConstructor);
 
 		return this;
 	};
@@ -65,7 +65,7 @@ var Entity = enhance(Object, function () {
 		var deleted = this._components.delete(componentConstructor);
 
 		return deleted
-			? this.emit('component:removed', componentConstructor, component) && component
+			? this.emit('component:removed', component, componentConstructor) && component
 			: false
 		;
 	};
