@@ -2,7 +2,7 @@ should = require 'chai' .should!
 { Component } = require '../../build/'
 
 describe 'new Componant(object)' (...) !->
-	it "should mix `object` properties in component instance" !->
+	it "base component constructor should mix `object` properties in component instance" !->
 		component = new Component do
 			'life': 100
 			'mana': 200
