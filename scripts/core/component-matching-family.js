@@ -1,5 +1,7 @@
-var enhance = require('enhance');
+/**
+ * @module Core
+**/
 
-var ComponentMatchingFamily = enhance(Object, function () {});
-
-module.exports = ComponentMatchingFamily;
+module.exports = require('enhance')(Object, function () {
+	this.constructor = function ComponentMatchingFamily () {};
+});

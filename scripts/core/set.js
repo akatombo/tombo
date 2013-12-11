@@ -1,11 +1,13 @@
-var enhance = require('enhance');
+/**
+ * @module Core
+**/
 
-var Set = enhance(Object, function () {
+module.exports = require('enhance')(Object, function () {
 	/**
 	 * @class Set
 	 * @constructor
 	**/
-	this.constructor = function () {
+	this.constructor = function Set () {
 		/**
 		 * @property head
 		 * @type {System|null}
@@ -26,12 +28,12 @@ var Set = enhance(Object, function () {
 	 *
 	 * @method add
 	 * @chainable
-	 * @param {any} item
+	 * @param {Object} item
 	 * @return {Set}
 	**/
 	this.add = function (item) {
-		if (!this.tail) {
-			this.tail.$next = item;
+		if (!this.head) {
+			this.head = this.tail = item;
 		} else {
 			this.tail.$next = item;
 			item.$previous = this.tail;
@@ -78,6 +80,7 @@ var Set = enhance(Object, function () {
 	**/
 	this.clear = function () {
 		var item;
+
 		while (this.head) {
 			item = this.head;
 			this.head = item.$next;
@@ -179,7 +182,8 @@ var Set = enhance(Object, function () {
 		 *		// instead of
 		 *		for (var item = items.head; item; item = item.$next) {}
 		 * @property prehead
-		 * @return {Object}
+		 * @type {Object}
+		 * @readonly
 		**/
 		// TODO check perf for caching it inside this
 		get prehead () {
@@ -192,9 +196,10 @@ var Set = enhance(Object, function () {
 		 * set length
 		 *
 		 * @property length
-		 * @return {Number}
+		 * @type {Number}
+		 * @readonly
 		**/
-		get length () {
+		get size () {
 			var counter = 0;
 			for (var item = this.head; item; item = item.$next) {
 				counter++;
@@ -202,15 +207,13 @@ var Set = enhance(Object, function () {
 			return counter;
 		},
 		/**
-		 * set length
+		 * true if set is empty
 		 *
-		 * @property length
-		 * @return {Number}
+		 * @property empty
+		 * @type {Boolean}
 		**/
 		get empty () {
 			return this.head === null;
 		}
-	}
+	};
 });
-
-module.exports = NodeSet;

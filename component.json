@@ -19,21 +19,16 @@
   "license": "MIT",
   "main": "scripts/index.js",
   "scripts": [
+    "scripts/index.js",
     "scripts/core/component-matching-family.js",
     "scripts/core/component.js",
+    "scripts/core/engine.js",
     "scripts/core/entity.js",
-    "scripts/core/node-set.js",
+    "scripts/core/entity-set.js",
     "scripts/core/node.js",
+    "scripts/core/node-set.js",
     "scripts/core/set.js",
     "scripts/core/system-set.js",
-    "scripts/core/system.js",
-    "scripts/index.js"
-  ],
-  "files": [],
-  "styles": [],
-  "images": [],
-  "templates": [],
-  "json": [
-    "component.json"
+    "scripts/core/system.js"
   ]
 }

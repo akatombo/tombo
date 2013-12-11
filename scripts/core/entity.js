@@ -1,12 +1,15 @@
-var enhance = require('enhance');
+/**
+ * @module Core
+**/
+
 var Map = require('map');
 
-var Entity = enhance(Object, function () {
+module.exports = require('enhance')(Object, function () {
 	/**
 	 * @class Entity
 	 * @constructor
 	**/
-	this.constructor = function () {
+	this.constructor = function Entity () {
 		/**
 		 * Contains all components attached to the entity
 		 *
@@ -110,5 +113,3 @@ var Entity = enhance(Object, function () {
 		return components;
 	};
 });
-
-module.exports = Entity;

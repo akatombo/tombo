@@ -2,12 +2,13 @@
  * @module Core
 **/
 
-var enhance = require('enhance');
+module.exports = require('enhance')(Object, function () {
+	/**
+	 * @class System
+	 * @constructor
+	**/
+	this.constructor = function System () {};
 
-/**
- * @class System
-**/
-var System = enhance(Object, function () {
 	/**
 	 * @property priority
 	 * @type {Number}
@@ -15,10 +16,28 @@ var System = enhance(Object, function () {
 	**/
 	this.priority = 0;
 
+	/**
+	 * @method add
+	**/
 	this.add = function () {};
+
+	/**
+	 * @method remove
+	**/
 	this.remove = function () {};
 
+	/**
+	 * @method update
+	**/
 	this.update = function () {};
-});
 
-module.exports = System;
+	/**
+	 * @method beforeUpdate
+	**/
+	this.beforeUpdate = function () {};
+
+	/**
+	 * @method afterUpdate
+	**/
+	this.afterUpdate = function () {};
+});

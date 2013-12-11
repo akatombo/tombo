@@ -1,20 +1,34 @@
-var enhance = require('enhance');
+/**
+ * @module Core
+**/
 
-var Node = enhance(Object, function () {});
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-Node.extendFrom = function (schema) {
-	var definition = {
-		$constructors: {}
-	};
+module.exports = require('enhance')(Object, function () {
+	/**
+	 * @class Node
+	 * @constructor
+	**/
+	this.constructor = function Node () {};
+}, function () {
+	/**
+	 * @method from
+	 * @static
+	 * @param {Object} schema
+	 * @return {Function}
+	**/
+	this.from = function (schema) {
+		var definition = {
+			$constructors: {}
+		};
 
-	for (var property in schema) {
-		if (schema.hasOwnProperty(property)) {
-			definition[property] = null;
-			definition.$constructors[property] = schema[property];
+		for (var property in schema) {
+			if (hasOwnProperty.call(schema, property)) {
+				definition[property] = null;
+				definition.$constructors[property] = schema[property];
+			}
 		}
-	}
 
-	return enhance(Node, definition);
-};
-
-module.exports = Node;
+		return enhance(this, definition);
+	};
+});

@@ -1,7 +1,16 @@
-var enhance = require('enhance');
-var Set = require('src/core/set');
+/**
+ * @module Core
+**/
 
-var SystemSet = enhance(Set, function () {
+var Set = require('./set');
+
+var SystemSet = require('enhance')(Set, function () {
+	/**
+	 * @class SystemSet
+	 * @constructor
+	**/
+	this.constructor = function SystemSet () {};
+
 	/**
 	 * Add a system, sort by priority
 	 *
