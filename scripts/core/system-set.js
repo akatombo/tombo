@@ -2,9 +2,10 @@
  * @module Core
 **/
 
+var enhance = require('enhance');
 var Set = require('./set');
 
-var SystemSet = require('enhance')(Set, function () {
+var SystemSet = enhance(Set, function () {
 	/**
 	 * @class SystemSet
 	 * @constructor
@@ -17,7 +18,7 @@ var SystemSet = require('enhance')(Set, function () {
 	 * @method add
 	 * @param {System} system
 	**/
-	this.add = function (system) {
+	this.add = function add (system) {
 		if (this.head) {
 			this.head = this.tail = system;
 			system.$next = system.$previous = null;

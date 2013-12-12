@@ -7,5 +7,7 @@ module.exports = {
 	NodeSet: require('./core/node-set'),
 	Set: require('./core/system-set'),
 	System: require('./core/system'),
-	SystemSet: require('./core/system-set')
+	SystemSet: require('./core/system-set'),
+
+	// fsm: {}
 };

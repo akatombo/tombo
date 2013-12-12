@@ -2,7 +2,9 @@
  * @module Core
 **/
 
-module.exports = require('enhance')(Object, function () {
+var enhance = require('enhance');
+
+module.exports = enhance(Object, function () {
 	/**
 	 * @class Set
 	 * @constructor
@@ -31,7 +33,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {Object} item
 	 * @return {Set}
 	**/
-	this.add = function (item) {
+	this.add = function add (item) {
 		if (!this.head) {
 			this.head = this.tail = item;
 		} else {
@@ -51,7 +53,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {any} item
 	 * @return {Set}
 	**/
-	this.remove = function (item) {
+	this.remove = function remove (item) {
 		if (this.head === item) {
 			this.head = item.$next;
 		}
@@ -74,11 +76,11 @@ module.exports = require('enhance')(Object, function () {
 	/**
 	 * Remove all items
 	 *
-	 * @method clear
+	 * @method removeAll
 	 * @chainable
 	 * @return {Set}
 	**/
-	this.clear = function () {
+	this.removeAll = function removeAll () {
 		var item;
 
 		while (this.head) {
@@ -100,7 +102,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @return {Object|null}
 	**/
 	//http://jsperf.com/instanceof-vs-isprototypeof
-	this.get = function (itemConstructor) {
+	this.get = function get (itemConstructor) {
 		for (var item = this.head; item; item = item.$next) {
 			if (item instanceof itemConstructor) {
 				return item;
@@ -119,7 +121,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {any} b
 	 * @return {Set}
 	**/
-	this.swap = function(a, b) {
+	this.swap = function swap (a, b) {
 		if (a.$previous === b) {
 			a.$previous = b.$previous;
 			b.$previous = a;
@@ -170,7 +172,7 @@ module.exports = require('enhance')(Object, function () {
 		return this;
 	};
 
-	this.insertionSort = function () {
+	this.insertionSort = function insertionSort () {
 
 	};
 

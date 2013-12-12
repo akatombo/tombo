@@ -1,10 +1,11 @@
 /**
  * @module Core
 **/
-
+var enhance = require('enhance');
+var Emitter = require('emitter');
 var Set = require('./set');
 
-module.exports = require('enhance')(Set, function (base) {
+module.exports = enhance(Set, function (base) {
 	/**
 	 * @class NodeSet
 	 * @constructor
@@ -26,7 +27,7 @@ module.exports = require('enhance')(Set, function (base) {
 	 * @event node:removed
 	 * @param {Node} node The removed node
 	**/
-	require('emitter')(this);
+	Emitter(this);
 
 
 	/**
@@ -37,7 +38,7 @@ module.exports = require('enhance')(Set, function (base) {
 	 * @param {Node} node
 	 * @return {NodeSet}
 	**/
-	this.add = function (node) {
+	this.add = function add (node) {
 		base.add.call(this, node);
 		this.emit('node:added', node);
 		return this;
@@ -51,7 +52,7 @@ module.exports = require('enhance')(Set, function (base) {
 	 * @param {Node} node
 	 * @return {NodeSet}
 	**/
-	this.remove = function (node) {
+	this.remove = function remove (node) {
 		base.remove.call(this, node);
 		this.emit('node:removed', node);
 		return this;
@@ -64,7 +65,7 @@ module.exports = require('enhance')(Set, function (base) {
 	 * @chainable
 	 * @return {NodeSet}
 	**/
-	this.clear = function () {
+	this.removeAll = function removeAll () {
 		var node;
 
 		while (this.head) {

@@ -3,8 +3,9 @@
 **/
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
+var enhance = require('enhance');
 
-module.exports = require('enhance')(Object, function () {
+module.exports = enhance(Object, function () {
 	/**
 	 * @class Component
 	 * @constructor

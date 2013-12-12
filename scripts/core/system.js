@@ -2,7 +2,9 @@
  * @module Core
 **/
 
-module.exports = require('enhance')(Object, function () {
+var enhance = require('enhance');
+
+module.exports = enhance(Object, function () {
 	/**
 	 * @class System
 	 * @constructor

@@ -2,10 +2,12 @@
  * @module Core
 **/
 
-var Map = require('map');
+var enhance = require('enhance');
 var uid = require('uid');
+var Emitter = require('emitter');
+var Map = require('map');
 
-module.exports = require('enhance')(Object, function () {
+module.exports = enhance(Object, function () {
 	/**
 	 * @class Entity
 	 * @constructor
@@ -47,7 +49,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {Component} component The removed component
 	 * @param {Function} componentConstructor Constructor of the removed component
 	**/
-	require('emitter')(this);
+	Emitter(this);
 
 	/**
 	 * Add a component, fire component:added event
@@ -57,7 +59,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {Component} component
 	 * @return {Entity}
 	**/
-	this.add = function (component) {
+	this.add = function add (component) {
 		componentConstructor = component.constructor;
 		this._components.set(componentConstructor, component);
 
@@ -73,7 +75,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {Function} componentConstructor
 	 * @return {Component|false}
 	**/
-	this.remove = function (componentConstructor) {
+	this.remove = function remove (componentConstructor) {
 		var component = this._components.get(componentConstructor);
 		var deleted = this._components.delete(componentConstructor);
 
@@ -90,7 +92,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {Function} componentConstructor
 	 * @return {Boolean}
 	**/
-	this.has = function (componentConstructor) {
+	this.has = function has (componentConstructor) {
 		return this._components.has(componentConstructor);
 	};
 
@@ -101,7 +103,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @param {Function} componentConstructor
 	 * @return {Component|null}
 	**/
-	this.get = function (componentConstructor) {
+	this.get = function get (componentConstructor) {
 		return this._components.get(componentConstructor);
 	};
 
@@ -111,7 +113,7 @@ module.exports = require('enhance')(Object, function () {
 	 * @method getAll
 	 * @return {Array}
 	**/
-	this.getAll = function () {
+	this.getAll = function getAll () {
 		var component;
 		var components = [];
 		var iterator = this._components.values();

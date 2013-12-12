@@ -1,15 +1,13 @@
 /**
  * @module Core
 **/
-
+var enhance = require('enhance');
 var Set = require('./set');
 
-module.exports = require('enhance')(Set, function () {
+module.exports = enhance(Set, function () {
 	/**
 	 * @class EntitySet
 	 * @constructor
 	**/
-	this.constructor = function EntitySet () {	};
-
-
+	this.constructor = function EntitySet () {};
 });
