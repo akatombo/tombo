@@ -19,27 +19,17 @@ module.exports = enhance(Object, function () {
 	this.priority = 0;
 
 	/**
-	 * @method add
+	 * @method onAddedToEngine
 	**/
-	this.add = function () {};
+	this.onAddedToEngine = function (/* engine */) {};
 
 	/**
-	 * @method remove
+	 * @method onRemovedFromEngine
 	**/
-	this.remove = function () {};
+	this.onRemovedFromEngine = function (/* engine */) {};
 
 	/**
 	 * @method update
 	**/
-	this.update = function () {};
-
-	/**
-	 * @method beforeUpdate
-	**/
-	this.beforeUpdate = function () {};
-
-	/**
-	 * @method afterUpdate
-	**/
-	this.afterUpdate = function () {};
+	this.update = function (/* time */) {};
 });

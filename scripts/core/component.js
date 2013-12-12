@@ -2,7 +2,7 @@
  * @module Core
 **/
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hasOwn = Object.prototype.hasOwnProperty;
 var enhance = require('enhance');
 
 module.exports = enhance(Object, function () {
@@ -13,7 +13,7 @@ module.exports = enhance(Object, function () {
 	**/
 	this.constructor = function Component (from) {
 		for (var property in from) {
-			if (hasOwnProperty.call(from, property)) {
+			if (hasOwn.call(from, property)) {
 				this[property] = from[property];
 			}
 		}

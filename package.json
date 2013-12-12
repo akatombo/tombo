@@ -13,15 +13,15 @@
     "yuidocjs": "~0.3.46"
   },
   "scripts": {
+    "build": "npm run build-component-production && npm run doc",
     "build-component-assets": "component-assets scripts:scripts/**/*.js json:component.json",
     "build-component-development": "component-build --dev --standalone tombo --name index",
     "build-component-production": "component-build --standalone tombo --name tombo --out . && uglifyjs tombo.js --output tombo.min.js",
-    "build": "npm run build-component-production && npm run doc",
+    "build-documentation": "yuidoc ./scripts",   
     "clean": "rm -rf build tombo.js tombo.min.js",
     "clean-deep": "rm -rf components node_modules && npm run clean",
-    "doc": "",
-    "lint": "",
     "install": "component install",
-    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75 --bail"
+    "lint": "jshint ./scripts",
+    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75"
   }
 }

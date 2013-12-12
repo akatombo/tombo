@@ -2,7 +2,7 @@
  * @module Core
 **/
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hasOwn = Object.prototype.hasOwnProperty;
 
 var enhance = require('enhance');
 var NodeSet = require('./node-set');
@@ -19,7 +19,7 @@ module.exports = enhance(Object, function () {
 
 		var prototype = nodeConstructor.prototype;
 		for (var property in prototype) {
-			if (hasOwnProperty.call(prototype, property) && property !== 'constructor') {
+			if (hasOwn.call(prototype, property) && property !== 'constructor') {
 				// use set instead of map ?
 				this.components.add(prototype.$constructors[property], property);
 			}
@@ -67,6 +67,8 @@ module.exports = enhance(Object, function () {
 	};
 
 	this.removeIfMatch = function removeIfMatch (entity) {
+		if (entity) {
 
+		}
 	};
 });

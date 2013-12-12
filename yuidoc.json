@@ -1,0 +1,12 @@
+{
+  "name": "tombo",
+  "description": "tombo - Entity/System engine",
+  "version": "0.0.0",
+  "url": "http://github.com/akatombo/tombo",
+  "options": {
+    "outdir": "./documentation/",
+    "path": "./scripts",
+    "linkNatives": true,
+    "tabtospace": 4
+  }
+}

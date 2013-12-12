@@ -1,3 +1,4 @@
+/* jshint -W079 */
 /**
  * @module Core
 **/
@@ -60,7 +61,7 @@ module.exports = enhance(Object, function () {
 	 * @return {Entity}
 	**/
 	this.add = function add (component) {
-		componentConstructor = component.constructor;
+		var componentConstructor = component.constructor;
 		this._components.set(componentConstructor, component);
 
 		this.emit('component:added', component, componentConstructor);
@@ -79,9 +80,9 @@ module.exports = enhance(Object, function () {
 		var component = this._components.get(componentConstructor);
 		var deleted = this._components.delete(componentConstructor);
 
-		return deleted
-			? this.emit('component:removed', component, componentConstructor) && component
-			: false
+		return deleted ? 
+			this.emit('component:removed', component, componentConstructor) && component :
+			false
 		;
 	};
 
@@ -118,7 +119,7 @@ module.exports = enhance(Object, function () {
 		var components = [];
 		var iterator = this._components.values();
 		
-		while (component = iterator.next()) {
+		while ((component = iterator.next())) {
 			components.push(component);
 		}
 

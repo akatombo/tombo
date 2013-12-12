@@ -1,3 +1,4 @@
+/* jshint -W079 */
 /**
  * @module Core
 **/

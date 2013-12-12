@@ -2,7 +2,7 @@
  * @module Core
 **/
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hasOwn = Object.prototype.hasOwnProperty;
 var enhance = require('enhance');
 
 module.exports = enhance(Object, function () {
@@ -24,7 +24,7 @@ module.exports = enhance(Object, function () {
 		};
 
 		for (var property in schema) {
-			if (hasOwnProperty.call(schema, property)) {
+			if (hasOwn.call(schema, property)) {
 				definition[property] = null;
 				definition.$constructors[property] = schema[property];
 			}
