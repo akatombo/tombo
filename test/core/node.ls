@@ -1,8 +1,6 @@
 should = require 'chai' .should!
 { Node, Component } = require '../../build/'
 
-console.log Component.enhance
-
 Position = Component.enhance!
 Life = Component.enhance!
 
