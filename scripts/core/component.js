@@ -1,8 +1,9 @@
+/* jshint -W079 */
 /**
  * @module Core
 **/
 
-var hasOwn = Object.prototype.hasOwnProperty;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 var enhance = require('enhance');
 
 module.exports = enhance(Object, function () {
@@ -13,7 +14,7 @@ module.exports = enhance(Object, function () {
 	**/
 	this.constructor = function Component (from) {
 		for (var property in from) {
-			if (hasOwn.call(from, property)) {
+			if (hasOwnProperty.call(from, property)) {
 				this[property] = from[property];
 			}
 		}

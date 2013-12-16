@@ -1,8 +1,9 @@
+/* jshint -W079 */
 /**
  * @module Core
 **/
 
-var hasOwn = Object.prototype.hasOwnProperty;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 var enhance = require('enhance');
 
 module.exports = enhance(Object, function () {
@@ -24,7 +25,7 @@ module.exports = enhance(Object, function () {
 		};
 
 		for (var property in schema) {
-			if (hasOwn.call(schema, property)) {
+			if (hasOwnProperty.call(schema, property)) {
 				definition[property] = null;
 				definition.$constructors[property] = schema[property];
 			}
