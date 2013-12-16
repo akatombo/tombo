@@ -8,6 +8,7 @@ module.exports = enhance(Object, function () {
 	/**
 	 * @class System
 	 * @constructor
+	 * @param {Number} priority
 	**/
 	this.constructor = function System (priority) {
 		this.priority = priority || 0;

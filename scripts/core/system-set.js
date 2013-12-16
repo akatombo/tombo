@@ -6,12 +6,15 @@
 var enhance = require('enhance');
 var Set = require('./set');
 
-var SystemSet = enhance(Set, function () {
+var SystemSet = enhance(Set, function (base) {
 	/**
 	 * @class SystemSet
+	 * @extends Set
 	 * @constructor
 	**/
-	this.constructor = function SystemSet () {};
+	this.constructor = function SystemSet () {
+		base.constructor.call(this);
+	};
 
 	/**
 	 * Add a system, sort by priority

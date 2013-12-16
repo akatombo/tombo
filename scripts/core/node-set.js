@@ -9,9 +9,12 @@ var Set = require('./set');
 module.exports = enhance(Set, function (base) {
 	/**
 	 * @class NodeSet
+	 * @extends Set
 	 * @constructor
 	**/
-	this.constructor = function NodeSet () {};
+	this.constructor = function NodeSet () {
+		base.constructor.call(this);
+	};
 
 
 
