@@ -5,7 +5,6 @@
   "devDependencies": {
     "chai": "~1.8.1",
     "component": "~0.17.0",
-    "component-assets": "0.0.2",
     "jshint": "~2.3.0",
     "LiveScript": "~1.2.0",
     "mocha": "~1.12.0",
@@ -13,8 +12,7 @@
     "yuidocjs": "~0.3.46"
   },
   "scripts": {
-    "build": "npm run build-component-production && npm run doc",
-    "build-component-assets": "component-assets scripts:scripts/**/*.js json:component.json",
+    "build": "npm run build-component-production",
     "build-component-development": "component-build --dev --standalone tombo --name index",
     "build-component-production": "component-build --standalone tombo --name tombo --out . && uglifyjs tombo.js --output tombo.min.js",
     "build-documentation": "yuidoc ./scripts",   
