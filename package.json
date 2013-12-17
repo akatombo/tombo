@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "npm run build-component-production",
-    "build-component-development": "component-build --dev --standalone tombo --name index",
+    "build-component-development": "component-build --standalone tombo --name index",
     "build-component-production": "component-build --standalone tombo --name tombo --out . && uglifyjs tombo.js --output tombo.min.js",
     "build-documentation": "yuidoc ./scripts",   
     "clean": "rm -rf build tombo.js tombo.min.js",
