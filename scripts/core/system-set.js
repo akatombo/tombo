@@ -23,7 +23,7 @@ var SystemSet = enhance(Set, function (base) {
 	 * @param {System} system
 	**/
 	this.add = function add (system) {
-		if (this.head) {
+		if (!this.head) {
 			this.head = this.tail = system;
 			system.$next = system.$previous = null;
 		} else {
@@ -56,22 +56,22 @@ var SystemSet = enhance(Set, function (base) {
 });
 
 /**
-	 * get a item with his constructor
-	 *
-	 * @method get
-	 * @param {Function} itemConstructor
-	 * @return {Object|null}
-	
-	//http://jsperf.com/instanceof-vs-isprototypeof
-	this.get = function get (itemConstructor) {
-		for (var item = this.head; item; item = item.$next) {
-			if (item instanceof itemConstructor) {
-				return item;
-			}
-		}
-
-		return null;
-	};
+ * get a item with his constructor
+ *
+ * @method get
+ * @param {Function} itemConstructor
+ * @return {Object|null}
 **/
+//http://jsperf.com/instanceof-vs-isprototypeof
+/*this.get = function get (itemConstructor) {
+	for (var item = this.head; item; item = item.$next) {
+		if (item instanceof itemConstructor) {
+			return item;
+		}
+	}
+
+	return null;
+};*/
+
 
 module.exports = SystemSet;
