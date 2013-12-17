@@ -53,7 +53,14 @@ module.exports = enhance(Object, function () {
 	 * @param {any} item
 	 * @return {Set}
 	**/
-	this.remove = function remove (item) {
+	/**
+	 * @method delete
+	 * @chainable
+	 * @param {any} item
+	 * @return {Set}
+	 * @alias remove
+	**/
+	this.remove = this.delete = function remove (item) {
 		if (this.head === item) {
 			this.head = item.$next;
 		}
@@ -76,11 +83,17 @@ module.exports = enhance(Object, function () {
 	/**
 	 * Remove all items
 	 *
-	 * @method removeAll
+	 * @method clear
 	 * @chainable
 	 * @return {Set}
 	**/
-	this.removeAll = function removeAll () {
+	/**
+	 * @method removeAll
+	 * @chainable
+	 * @return {Set}
+	 * @alias clear
+	**/
+	this.clear = this.removeAll = function clear () {
 		var item;
 
 		while (this.head) {
@@ -94,6 +107,22 @@ module.exports = enhance(Object, function () {
 		return this;
 	};
 
+	/**
+	 *
+	 * @method has
+	 * @param {Object} searchedItem
+	 * @return {Boolean}
+	**/
+	this.has = function has (searchedItem) {
+		for (var item = this.head; item; item = item.$next) {
+			if (item === searchedItem) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
 	
 	/**
 	 * get a item with his index
@@ -104,11 +133,10 @@ module.exports = enhance(Object, function () {
 	**/
 	this.get = function get (index) {
 		var counter = 0;
-		for (var item = this.head; item; item = item.$next) {
+		for (var item = this.head; item; item = item.$next, counter++) {
 			if (counter === index) {
 				return item;
 			}
-			counter++;
 		}
 
 		return null;
@@ -181,13 +209,13 @@ module.exports = enhance(Object, function () {
 	return {
 		/**
 		 * empty anchor for quick for looping
+		 * @property prehead
+		 * @type {Object}
+		 * @readonly
 		 * @exemple
 		 *		for (var item = items.prehead; item = item.$next;) {}
 		 *		// instead of
 		 *		for (var item = items.head; item; item = item.$next) {}
-		 * @property prehead
-		 * @type {Object}
-		 * @readonly
 		**/
 		// TODO check perf for caching it inside this
 		get prehead () {

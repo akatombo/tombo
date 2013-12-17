@@ -135,7 +135,7 @@ module.exports = enhance(Object, function () {
 			family.removeEntity(entity);
 		});
 
-		this.entities.remove(entity);
+		this.entities.delete(entity);
 		return this;
 	};
 
@@ -202,7 +202,7 @@ module.exports = enhance(Object, function () {
 	 * @return {Engine}
 	**/
 	this.removeSystem = function removeSystem (system) {
-		this.systems.remove(system);
+		this.systems.delete(system);
 		system.onRemoveFromEngine(this);
 
 		return this;
@@ -250,8 +250,9 @@ module.exports = enhance(Object, function () {
 	/**
 	 * Remove all systems
 	 *
-	 * @method removeAllSystems
+	 * @method update
 	 * @chainable
+	 * @param {Number} time
 	 * @return {Engine}
 	**/
 	this.update = function update (time) {
@@ -264,5 +265,7 @@ module.exports = enhance(Object, function () {
 
 		this.updating = false;
 		this.emit('update:complete');
+
+		return this;
 	};
 });

@@ -88,7 +88,7 @@ module.exports = enhance(Object, function () {
 			var node = this.entities.get(entity);
 			entity.off('component:removed', this.onComponentRemovedFromEntity);
 			this.entities.delete(entity);
-			this.nodes.remove(node);
+			this.nodes.delete(node);
 
 			// TODO : add pool cache management
 			if (this.engine.updating) {
