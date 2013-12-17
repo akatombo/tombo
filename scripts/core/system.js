@@ -11,7 +11,7 @@ module.exports = enhance(Object, function () {
 	 * @param {Number} priority
 	**/
 	this.constructor = function System (priority) {
-		this.priority = priority || 0;
+		this.priority = priority || this.priority;
 	};
 
 	/**
