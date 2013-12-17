@@ -28,7 +28,7 @@ var SystemSet = enhance(Set, function (base) {
 			system.$next = system.$previous = null;
 		} else {
 			for (var node = this.tail; node; node = node.$previous) {
-				if (node.priority <= system.priority) {
+				if (node.priority >= system.priority) {
 					break;
 				}
 			}
