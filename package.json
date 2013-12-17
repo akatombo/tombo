@@ -20,6 +20,7 @@
     "clean-deep": "rm -rf components node_modules && npm run clean",
     "install": "component install",
     "lint": "jshint ./scripts",
-    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75"
+    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75",
+    "validate": "npm test && npm run lint"
   }
 }
