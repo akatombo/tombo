@@ -94,19 +94,21 @@ module.exports = enhance(Object, function () {
 		return this;
 	};
 
+	
 	/**
-	 * get a item with his constructor
+	 * get a item with his index
 	 *
 	 * @method get
-	 * @param {Function} itemConstructor
+	 * @param {Number} index
 	 * @return {Object|null}
 	**/
-	//http://jsperf.com/instanceof-vs-isprototypeof
-	this.get = function get (itemConstructor) {
+	this.get = function get (index) {
+		var counter = 0;
 		for (var item = this.head; item; item = item.$next) {
-			if (item instanceof itemConstructor) {
+			if (counter === index) {
 				return item;
 			}
+			counter++;
 		}
 
 		return null;
