@@ -21,6 +21,7 @@
   "main": "scripts/index.js",
   "scripts": [
     "scripts/index.js",
+    "scripts/core/index.js",
     "scripts/core/component-matching-family.js",
     "scripts/core/component.js",
     "scripts/core/engine.js",
