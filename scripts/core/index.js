@@ -11,7 +11,7 @@ module.exports = {
 	Entity: require('./entity'),
 	Node: require('./node'),
 	NodeSet: require('./node-set'),
-	Set: require('./system-set'),
+	Set: require('./set'),
 	System: require('./system'),
 	SystemSet: require('./system-set')
 };
