@@ -7,6 +7,7 @@ var enhance = require('enhance');
 var Emitter = require('emitter');
 var Map = require('map');
 
+var ComponentMatchingFamily = require('./component-matching-family');
 var Entity = require('./entity');
 var System = require('./system');
 var EntitySet = require('./entity-set');
@@ -17,14 +18,24 @@ module.exports = enhance(Object, function () {
 	 * @class Engine
 	 * @constructor
 	**/
-	this.constructor = function Engine () {
+	this.constructor = function Engine (familyConstructor) {
 		this.entities = new EntitySet();
 		this.systems = new SystemSet();
 		this.families = new Map();
 
+		this.familyConstructor = familyConstructor || this.familyConstructor;
+
 		this.updating = false;
+		// TODO : manage context in emitter
 		this.onComponentAddedToEntity = this.onComponentAddedToEntity.bind(this);
 	};
+
+	/**
+	 * @property familyConstructor
+	 * @type {Function}
+	 * @default ComponentMatchingFamily
+	**/
+	this.familyConstructor = ComponentMatchingFamily;
 
 	/**
 	 * Fired when update start
