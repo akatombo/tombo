@@ -1,5 +1,5 @@
 should = require 'chai' .should!
-{ Node, Component } = require '../../build/'
+{ Node, Component } = require '../../build/tombo'
 
 Position = Component.enhance!
 Life = Component.enhance!

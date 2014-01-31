@@ -1,5 +1,5 @@
 should = require 'chai' .should!
-{ Entity, Component } = require '../../build/'
+{ Entity, Component } = require '../../build/tombo'
 
 Position = Component.enhance!
 Heroe = Component.enhance!
@@ -21,6 +21,7 @@ describe 'new Entity()' !->
 
 			entity.add heroe
 			entity.get Heroe .should.be.equal heroe
+
 
 		it "should emit component:added event with component and componentConstructor" !->
 			entity.once 'component:added' (component, component-constructor) ->

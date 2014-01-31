@@ -3,24 +3,35 @@
   "version": "0.0.0",
   "main": "scripts/index",
   "devDependencies": {
+    "gulp": "~3.4.0",
+    "gulp-component": "~0.1.4",
+    "gulp-uglify": "~0.1.0",
     "chai": "~1.8.1",
     "component": "~0.17.0",
     "jshint": "~2.3.0",
     "LiveScript": "~1.2.0",
     "mocha": "~1.12.0",
     "uglify-js": "~2.4.3",
-    "yuidocjs": "~0.3.46"
+    "yuidocjs": "~0.3.46",
+    "gulp-rename": "~0.2.2",
+    "gulp-header": "~1.0.2",
+    "gulp-mocha": "~0.4.1",
+    "gulp-jshint": "~1.3.4",
+    "gulp-watch": "~0.5.0",
+    "gulp-livescript": "~0.1.1",
+    "gulp-spawn": "~0.2.1"
   },
   "scripts": {
-    "build": "npm run build-component-production",
-    "build-component-development": "component-build --standalone tombo --name index",
-    "build-component-production": "component-build --standalone tombo --name tombo --out . && uglifyjs tombo.js --output tombo.min.js",
-    "build-documentation": "yuidoc ./scripts",   
+    "build": "npm run production",
+    "development": "gulp build --require LiveScript",
+    "production": "gulp build --production --require LiveScript",
+    "documentation": "yuidoc ./scripts",
     "clean": "rm -rf build tombo.js tombo.min.js",
     "clean-deep": "rm -rf components node_modules && npm run clean",
     "install": "component install",
-    "lint": "jshint ./scripts",
-    "test": "npm run build-component-development && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75",
-    "validate": "npm test && npm run lint"
+    "lint": "gulp lint --require LiveScript",
+    "test": "gulp build --require LiveScript && mocha --recursive --compilers ls:LiveScript --reporter dot --timeout 1s --slow 75",
+    "validate": "npm test && npm run lint",
+    "watch": ""
   }
 }

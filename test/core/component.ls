@@ -1,5 +1,5 @@
 should = require 'chai' .should!
-{ Component } = require '../../build/'
+{ Component } = require '../../build/tombo'
 
 describe 'new Componant(object)' (...) !->
 	it "base component constructor should mix `object` properties in component instance" !->

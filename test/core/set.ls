@@ -1,5 +1,5 @@
 should = require 'chai' .should!
-{ Set } = require '../../build/'
+{ Set } = require '../../build/tombo'
 
 describe 'new Set()' !->
 	set = new Set!
