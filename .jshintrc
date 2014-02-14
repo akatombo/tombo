@@ -3,6 +3,7 @@
   "indent": 4,
   "undef": true,
   "unused": true,
+  "esnext": true,
   "globals": {
     "exports": true,
     "require": true,

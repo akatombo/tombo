@@ -1,6 +1,4 @@
 build
-components
+documentation
 node_modules
-test
-.gitignore
-.smonignore
+tombo/components

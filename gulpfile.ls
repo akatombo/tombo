@@ -24,17 +24,7 @@ for [name, alias] in [ <[task]> <[run]> <[watch]> <[src from]> <[dest to]> ]
 
 root = './component.json'
 scripts = './scripts/**/*.js'
-destination = if production then '.' else './build/'
-
 banner = "/* #{name} - v#{version} */\n"
-
-options = standalone: name
-
-filename = (dirname, basename, extension) -> "#{name}#{extension}"
-minified-filename = (dirname, basename, extension) -> "#{name}.min#{extension}"
-
-
-
 
 
 task 'default' ->
@@ -42,26 +32,35 @@ task 'default' ->
 
 
 task 'build' ->
-	from root
-		.pipe component options
-		.pipe prepend banner
-		.pipe rename filename
-		.pipe to destination
+	folder = './build/'
+	options = {}
 
 	if production
+		folder = '.'
+		options.standalone = name
+
 		from root
 			.pipe component options
 			.pipe minify!
 			.pipe prepend banner
-			.pipe rename minified-filename
-			.pipe to destination
+			.pipe rename (dirname, basename, extension) -> "#{name}.min#{extension}"
+			.pipe to folder
+
+	from root
+		.pipe component options
+		.pipe prepend banner
+		.pipe rename (dirname, basename, extension) -> "#{name}#{extension}"
+		.pipe to folder	
 
 
 task 'lint' ->
 	from scripts
 		.pipe lint!
-		.pipe lint.reporter 'default'
+		.pipe lint.reporter require 'jshint-stylish'
 
 
 task 'watch' ->
-	...
+	run 'build'
+
+	watch [root, scripts] !->
+		run 'build'

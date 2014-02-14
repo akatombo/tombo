@@ -1,2 +1,9 @@
+require 'mocha'
 require 'chai' .should!
-tombo = require '../build/tombo'
+
+mocha.setup 'bdd'
+
+for __ in <[entity]>
+	require "./#{__}"
+
+mocha.run!

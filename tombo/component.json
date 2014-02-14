@@ -1,0 +1,32 @@
+{
+  "name": "tombo",
+  "repo": "akatombo/tombo",
+  "description": "entity system game engine",
+  "version": "0.0.0",
+  "keywords": [
+    "entity",
+    "system",
+    "game",
+    "engine"
+  ],
+  "dependencies": {
+    "component/inherit": "0.0.3",
+    "wryk/uid": "1.0.0",
+    "wryk/emitter": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js",
+    "core/index.js",
+    "core/component.js",
+    "core/engine.js",
+    "core/entity.js",
+    "core/family.js",
+    "core/system.js"
+  ],
+  "json": [
+    "component.json"
+  ]
+}

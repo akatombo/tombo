@@ -1,4 +1,8 @@
 build
-components
 documentation
 node_modules
+
+tombo/components
+
+test/components
+test/node_modules

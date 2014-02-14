@@ -1,9 +1,8 @@
-should = require 'chai' .should!
-{ Entity, Component } = require '../../build/tombo'
+{ Entity, Component } = require 'tombo'
 
-Position = Component.enhance!
-Heroe = Component.enhance!
-Life = Component.enhance!
+class Position extends Component
+class Heroe extends Component
+class Life extends Component
 
 position = new Position!
 heroe = new Heroe!
@@ -24,7 +23,7 @@ describe 'new Entity()' !->
 
 
 		it "should emit component:added event with component and componentConstructor" !->
-			entity.once 'component:added' (component, component-constructor) ->
+			entity.once 'component:added' (entity, component, component-constructor) ->
 				component.should.be.equal heroe
 				component-constructor.should.be.equal Heroe
 
@@ -36,7 +35,7 @@ describe 'new Entity()' !->
 
 	describe '#remove(componentConstructor)' (...) !->
 		it "should emit component:remove event with component and componentConstructor" !->
-			entity.once 'component:remove' (component, component-constructor) ->
+			entity.once 'component:remove' (entity, component, component-constructor) ->
 				component.should.be.equal life
 				component-constructor.should.be.equal Life
 				
@@ -61,9 +60,9 @@ describe 'new Entity()' !->
 			entity.get Life .should.be.equal life
 
 
-	describe '#getAll()' (...) !->
-		it "should return an array of all component" !->
-			all-components = entity.getAll!
+	# describe '#getAll()' (...) !->
+	# 	it "should return an array of all component" !->
+	# 		all-components = entity.getAll!
 
-			all-components.forEach (component) !->
-				entity.has component.constructor .should.be.true
+	# 		all-components.forEach (component) !->
+	# 			entity.has component.constructor .should.be.true
