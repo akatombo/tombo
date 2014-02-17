@@ -3,7 +3,6 @@ require 'chai' .should!
 
 mocha.setup 'bdd'
 
-for __ in <[entity]>
-	require "./#{__}"
+require './core/entity'
 
 mocha.run!

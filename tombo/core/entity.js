@@ -2,6 +2,9 @@ var inherit = require('inherit');
 var uid = require('uid');
 var Emitter = require('emitter');
 
+// TODO: .removeAll() ?
+// TODO: .getAll() ?
+
 /**
  * @module core
 **/
@@ -72,16 +75,14 @@ Entity.prototype.add = function add (component) {
  * Remove a component with his constructor, fire component:removed event
  *
  * @method remove
+ * @chainable
  * @param {Function} componentConstructor
- * @return {Component|false}
+ * @return {Entity}
 **/
 Entity.prototype.remove = function remove (componentConstructor) {
-	var component = this.components.get(componentConstructor);
-	var deleted = this.components.delete(componentConstructor);
+	this.components.delete(componentConstructor);
 
-	return deleted ?
-		this.emit('component:removed', this, component, componentConstructor) && component :
-		false;
+	return this;
 };
 
 /**
