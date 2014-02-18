@@ -13,6 +13,11 @@
   "main": "index.js",
   "scripts": [
     "index.ls",
-    "core/entity.ls"
+    "source/components/position.ls",
+    "test/index.ls",
+    "test/core/index.ls",
+    "test/core/family.ls",
+    "test/core/entity.ls",
+    "test/core/system.ls"
   ]
 }

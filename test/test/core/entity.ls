@@ -1,13 +1,10 @@
-{ Entity, Component } = require 'tombo'
-
-class Position extends Component
-	(@x, @y) ->
+Entity = require 'tombo/core/entity'
+Position = require '../../source/components/position'
 
 position-a = new Position 5, 7
 position-b = new Position 3, 1
 
-
-describe 'new Entity!' !->
+describe 'Entity' !->
 	var tree
 
 	before-each !->

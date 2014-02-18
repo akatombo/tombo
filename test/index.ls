@@ -3,6 +3,6 @@ require 'chai' .should!
 
 mocha.setup 'bdd'
 
-require './core/entity'
+require './test/index'
 
 mocha.run!
