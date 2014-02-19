@@ -18,8 +18,8 @@ class Render extends System
 		@context = @canvas.get-context '2d'
 
 	require:
-		'position': Position
-		'sprite': Sprite
+		position: Position
+		sprite: Sprite
 
 	# do something and display that fucking sprite at the right position
 	# in the RenderSystem case, delta-time is useless :)
