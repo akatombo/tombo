@@ -46,7 +46,7 @@ Engine.prototype.run = function run (deltaTime) {
 	this.updating = true;
 	this.emit('run:start');
 
-	for (let [systemConstructor, system] of this.systems) {
+	for (var [systemConstructor, system] of this.systems) {
 		system.run(deltaTime, this.families.get(systemConstructor));
 	}
 
@@ -110,7 +110,7 @@ Engine.prototype.remove = function remove (entityOrSystem) {
 Engine.prototype.addEntity = function addEntity (entity) {
 	entity.on('component:added', this.onComponentAddedToEntity);
 
-	for (let [systemConstructor, family] of this.families) {
+	for (var [systemConstructor, family] of this.families) {
 		family.add(entity);
 	}
 
@@ -130,7 +130,7 @@ Engine.prototype.addEntity = function addEntity (entity) {
 Engine.prototype.removeEntity = function removeEntity (entity) {
 	entity.off('component:added', this.onComponentAddedToEntity);
 
-	for (let [systemConstructor, family] of this.families) {
+	for (var [systemConstructor, family] of this.families) {
 		family.remove(entity);
 	}
 
@@ -161,10 +161,12 @@ Engine.prototype.removeAllEntities = function removeAllEntities () {
 **/
 Engine.prototype.addSystem = function addSystem (system) {
 	var systemConstructor = system.constructor;
-	system.whenAddedToEngine(this);
 
-	this.systems.set(systemConstructor, system);
-	this.families.set(systemConstructor, new Family(system.require));
+	system.whenAddedToEngine(this);
+	this.systems.set(systemConstructor, {
+		system: system,
+		family: new Family(system.require)
+	});
 
 	return this;
 };
@@ -177,8 +179,8 @@ Engine.prototype.addSystem = function addSystem (system) {
  * @param {System} system
  * @return {Engine}
 **/
-Engine.prototype.removeSystem = function removeSystem (system) {
-	this.systems.delete(system);
+Engine.prototype.removeSystem = function removeSystem (systemConstructor) {
+	this.systems.delete(systemConstructor);
 	system.whenRemovedFromEngine(this);
 
 	return this;
@@ -186,8 +188,8 @@ Engine.prototype.removeSystem = function removeSystem (system) {
 
 
 Engine.prototype.removeAllSystems = function removeAllSystems () {
-	for (let [systemConstructor, system] of this.systems) {
-		this.removeSystem(system);
+	for (var [systemConstructor, system] of this.systems) {
+		this.removeSystem(systemConstructor);
 	}
 
 	return this;

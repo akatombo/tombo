@@ -16,7 +16,8 @@ function Family (schema) {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	this.entities = new Map(); // KEY: entity instance | VALUE: family node for current entity instance
+	// KEY: entity instance | VALUE: entity node
+	this.entities = new Map();
 
 	/**
 	 * 
@@ -26,9 +27,9 @@ function Family (schema) {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	this.components = new Map(); // KEY: component constructor | VALUE: component link name
+	// KEY: component constructor | VALUE: component link name
+	this.components = new Map();
 
-	// LET keyword bug on FF
 	for (var componentName in schema) {
 		this.components.set(schema[componentName], componentName);
 	}
@@ -45,7 +46,7 @@ Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
 
 		var node = {};
-		for (let [componentConstructor, componentName] of this.components) {
+		for (var [componentConstructor, componentName] of this.components) {
 			node[componentName] = entity.get(componentConstructor);
 		}
 
@@ -77,7 +78,7 @@ Family.prototype.remove = function remove (entity) {
  * @return {}
 **/
 Family.prototype.match = function (entity) {
-	for (let [componentConstructor, componentName] of this.components) {
+	for (var [componentConstructor, componentName] of this.components) {
 		if (!entity.has(componentConstructor)) {
 			return false;
 		}
