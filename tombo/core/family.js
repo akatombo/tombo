@@ -6,11 +6,10 @@ module.exports = Family;
 /**
  * @class Family
  * @constructor
+ * @param {Object} schema
 **/
 function Family (schema) {
 	/**
-	 * 
-	 *
 	 * @property entities
 	 * @private
 	 * @type {Map}
@@ -20,8 +19,6 @@ function Family (schema) {
 	this.entities = new Map();
 
 	/**
-	 * 
-	 *
 	 * @property components
 	 * @private
 	 * @type {Map}
@@ -33,14 +30,17 @@ function Family (schema) {
 	for (var componentName in schema) {
 		this.components.set(schema[componentName], componentName);
 	}
+
+	//TODO: throw error when schema is empty
 }
 
 /**
  * 
  *
- * @method 
- * @param {}
- * @return {}
+ * @method add
+ * @chainable
+ * @param {Entity} entity
+ * @return {Family}
 **/
 Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
@@ -50,32 +50,47 @@ Family.prototype.add = function add (entity) {
 			node[componentName] = entity.get(componentConstructor);
 		}
 
-		entity.on('component:removed', this.onComponentRemoved, this);
+		entity.on('component:removed', onComponentRemovedFromEntity, this);
 		this.entities.set(entity, node); 
 	}
 	
+	return this;
 };
 
 /**
  * 
  *
- * @method 
- * @param {}
- * @return {}
+ * @method remove
+ * @chainable
+ * @param {Entity} entity
+ * @return {Family}
 **/
 Family.prototype.remove = function remove (entity) {
 	if (this.entities.has(entity)) {
-		entity.off('component:removed', this.onComponentRemoved, this);
+		entity.off('component:removed', onComponentRemovedFromEntity, this);
 		this.entities.delete(entity);
 	}
+
+	return this;
 };
 
 /**
  * 
  *
- * @method 
- * @param {}
- * @return {}
+ * @method has
+ * @param {Entity} entity
+ * @return {Boolean}
+**/
+Family.prototype.has = function has (entity) {
+	return this.entities.has(entity);
+};
+
+/**
+ * 
+ *
+ * @method match
+ * @param {Entity} entity
+ * @return {Boolean}
 **/
 Family.prototype.match = function (entity) {
 	for (var [componentConstructor, componentName] of this.components) {
@@ -90,12 +105,14 @@ Family.prototype.match = function (entity) {
 /**
  * 
  *
- * @method 
- * @param {}
+ * @method check
+ * @param {Entity} entity
+ * @param {Component} component
+ * @param {Function} componentConstructor
  * @return {}
 **/
-Family.prototype.onComponentRemoved = function (entity, component, componentConstructor) {
-	if (this.components.has(componentConstructor)) {
+function onComponentRemovedFromEntity (entity, component, componentConstructor) {
+	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
 		this.remove(entity);
 	}
-};
+}

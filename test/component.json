@@ -1,5 +1,8 @@
 {
   "name": "tombo-test-suite",
+  "paths": [
+    ".."
+  ],
   "dependencies": {
     "visionmedia/mocha": "1.17.7",
     "chaijs/chai": "1.9.0"
@@ -7,13 +10,11 @@
   "local": [
     "tombo"
   ],
-  "paths": [
-    ".."
-  ],
   "main": "index.js",
   "scripts": [
     "index.ls",
     "source/components/position.ls",
+    "source/components/stats.ls",
     "test/index.ls",
     "test/core/index.ls",
     "test/core/family.ls",
