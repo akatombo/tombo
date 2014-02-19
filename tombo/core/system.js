@@ -10,7 +10,6 @@ module.exports = System;
 function System () {}
 
 /**
- *
  * @property require
  * @type {Object}
  * @default {}
@@ -18,19 +17,9 @@ function System () {}
 System.prototype.require = {};
 
 /**
- * called when system is added to an engine
- * @method add
-**/
-System.prototype.whenAddedToEngine = function () {};
-
-/**
- * called when system is removed to an engine
- * @method remove
-**/
-System.prototype.whenRemovedFromEngine = function () {};
-
-/**
  * called for entities updates
  * @method run
+ * @param {Number} deltaTime
+ * @param {MapIterator} entities
 **/
-System.prototype.run = function () {};
+System.prototype.run = function (deltaTime, entities) {};

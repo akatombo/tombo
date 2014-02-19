@@ -1,24 +1,58 @@
 var inherit = require('inherit');
 var Emitter = require('emitter');
 
+var Family = require('./family');
 var Entity = require('./entity');
 var System = require('./system');
-var Family = require('./family');
 
 /**
  * @module core
 **/
 module.exports = Engine;
 
-function Engine () {
-	this.updating = false;
-
-	this.entities = new Set();
-	this.systems = new Map();
-	this.families = new Map();
+function onComponentAddedToEntity (entity, component, componentConstructor) {
+	for (var family of this.families.values()) {
+		family.add(entity);
+	}
 }
 
+/**
+ * @class Engine
+ * @constructor
+**/
+function Engine () {
+	/**
+	 * @property updating
+	 * @private
+	 * @type {Boolean}
+	 * @default false
+	**/
+	this.updating = false;
 
+	/**
+	 * @property entities
+	 * @private
+	 * @type {Set}
+	 * @default new Set()
+	**/
+	this.entities = new Set();
+
+	/**
+	 * @property systems
+	 * @private
+	 * @type {Map}
+	 * @default new Map()
+	**/
+	this.systems = new Map();
+
+	/**
+	 * @property families
+	 * @private
+	 * @type {Map}
+	 * @default new Map()
+	**/
+	this.families = new Map();
+}
 
 /**
  * Fired when update start
@@ -33,10 +67,7 @@ function Engine () {
 **/
 inherit(Engine, Emitter);
 
-
-
 /**
- *
  * @method run
  * @chainable
  * @param {Number} delta-time
@@ -47,7 +78,7 @@ Engine.prototype.run = function run (deltaTime) {
 	this.emit('run:start');
 
 	for (var [systemConstructor, system] of this.systems) {
-		system.run(deltaTime, this.families.get(systemConstructor));
+		system.run(deltaTime, this.families.entities.values());
 	}
 
 	this.updating = false;
@@ -56,13 +87,7 @@ Engine.prototype.run = function run (deltaTime) {
 	return this;
 };
 
-
-
-
-
 /**
- * Add an entity or a system
- *
  * @method add
  * @chainable
  * @param {Entity|System} entityOrSystem
@@ -78,10 +103,7 @@ Engine.prototype.add = function add (entityOrSystem) {
 	return this;
 };
 
-
 /**
- * Remove an entity or a system
- *
  * @method remove
  * @chainable
  * @param {Entity|System} entityOrSystem
@@ -97,20 +119,16 @@ Engine.prototype.remove = function remove (entityOrSystem) {
 	return this;
 };
 
-
-
 /**
- * Add an entity
- *
  * @method addEntity
  * @chainable
  * @param {Entity} entity
  * @return {Engine}
 **/
 Engine.prototype.addEntity = function addEntity (entity) {
-	entity.on('component:added', this.onComponentAddedToEntity);
+	entity.on('component:added', onComponentAddedToEntity, this);
 
-	for (var [systemConstructor, family] of this.families) {
+	for (var family of this.families.values()) {
 		family.add(entity);
 	}
 
@@ -120,17 +138,15 @@ Engine.prototype.addEntity = function addEntity (entity) {
 };
 
 /**
- * Remove an entity
- *
  * @method removeEntity
  * @chainable
  * @param {Entity} entity
  * @return {Engine}
 **/
 Engine.prototype.removeEntity = function removeEntity (entity) {
-	entity.off('component:added', this.onComponentAddedToEntity);
+	entity.off('component:added', onComponentAddedToEntity, this);
 
-	for (var [systemConstructor, family] of this.families) {
+	for (var family of this.families.values()) {
 		family.remove(entity);
 	}
 
@@ -139,17 +155,18 @@ Engine.prototype.removeEntity = function removeEntity (entity) {
 	return this;
 };
 
-
+/**
+ * @method removeAllEntity
+ * @chainable
+ * @return {Engine}
+**/
 Engine.prototype.removeAllEntities = function removeAllEntities () {
-	// FIX ME: LET keyword bug on FF
 	for (var entity of this.entities) {
 		this.removeEntity(entity);
 	}
 
 	return this;
 };
-
-
 
 /**
  * Add a system
@@ -162,18 +179,13 @@ Engine.prototype.removeAllEntities = function removeAllEntities () {
 Engine.prototype.addSystem = function addSystem (system) {
 	var systemConstructor = system.constructor;
 
-	system.whenAddedToEngine(this);
-	this.systems.set(systemConstructor, {
-		system: system,
-		family: new Family(system.require)
-	});
+	this.systems.set(systemConstructor, system);
+	this.families.set(systemConstructor, new Family(system.require));
 
 	return this;
 };
 
 /**
- * Remove a system
- *
  * @method removeSystem
  * @chainable
  * @param {System} system
@@ -181,14 +193,18 @@ Engine.prototype.addSystem = function addSystem (system) {
 **/
 Engine.prototype.removeSystem = function removeSystem (systemConstructor) {
 	this.systems.delete(systemConstructor);
-	system.whenRemovedFromEngine(this);
+	this.families.delete(systemConstructor);
 
 	return this;
 };
 
-
+/**
+ * @method removeAllSystems
+ * @chainable
+ * @return {Engine}
+**/
 Engine.prototype.removeAllSystems = function removeAllSystems () {
-	for (var [systemConstructor, system] of this.systems) {
+	for (var systemConstructor of this.systems.keys()) {
 		this.removeSystem(systemConstructor);
 	}
 

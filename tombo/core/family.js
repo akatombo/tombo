@@ -3,6 +3,12 @@
 **/
 module.exports = Family;
 
+function onComponentRemovedFromEntity (entity, component, componentConstructor) {
+	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
+		this.remove(entity);
+	}
+}
+
 /**
  * @class Family
  * @constructor
@@ -35,8 +41,6 @@ function Family (schema) {
 }
 
 /**
- * 
- *
  * @method add
  * @chainable
  * @param {Entity} entity
@@ -58,8 +62,6 @@ Family.prototype.add = function add (entity) {
 };
 
 /**
- * 
- *
  * @method remove
  * @chainable
  * @param {Entity} entity
@@ -75,8 +77,6 @@ Family.prototype.remove = function remove (entity) {
 };
 
 /**
- * 
- *
  * @method has
  * @param {Entity} entity
  * @return {Boolean}
@@ -86,8 +86,6 @@ Family.prototype.has = function has (entity) {
 };
 
 /**
- * 
- *
  * @method match
  * @param {Entity} entity
  * @return {Boolean}
@@ -101,18 +99,3 @@ Family.prototype.match = function (entity) {
 
 	return true;
 };
-
-/**
- * 
- *
- * @method check
- * @param {Entity} entity
- * @param {Component} component
- * @param {Function} componentConstructor
- * @return {}
-**/
-function onComponentRemovedFromEntity (entity, component, componentConstructor) {
-	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
-		this.remove(entity);
-	}
-}
