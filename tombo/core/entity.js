@@ -80,7 +80,12 @@ Entity.prototype.add = function add (component) {
  * @return {Entity}
 **/
 Entity.prototype.remove = function remove (componentConstructor) {
-	this.components.delete(componentConstructor);
+	if (this.components.has(componentConstructor)) {
+		var component = this.components.get(componentConstructor);
+		this.components.delete(componentConstructor);
+
+		this.emit('component:removed', this, component, componentConstructor);
+	}
 
 	return this;
 };

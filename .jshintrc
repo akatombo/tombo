@@ -1,12 +1,22 @@
 {
+  "camelcase": true,
   "curly": true,
+  "eqeqeq": true,
+  "esnext": true,
+  "expr": true,
+  "freeze": true,
+  "funcscope": true,
   "indent": 4,
+  "newcap": true,
+  "trailing": true,
   "undef": true,
   "unused": true,
-  "esnext": true,
   "globals": {
     "exports": true,
     "require": true,
-    "module": true
+    "module": true,
+    "it": true,
+    "describe": true,
+    "beforeEach": true
   }
 }

@@ -5,20 +5,21 @@
   ],
   "dependencies": {
     "visionmedia/mocha": "1.17.7",
-    "chaijs/chai": "1.9.0"
+    "chaijs/chai": "1.9.0",
+    "component/inherit": "0.0.3"
   },
   "local": [
     "tombo"
   ],
   "main": "index.js",
   "scripts": [
-    "index.ls",
-    "source/components/position.ls",
-    "source/components/stats.ls",
-    "test/index.ls",
-    "test/core/index.ls",
-    "test/core/family.ls",
-    "test/core/entity.ls",
+    "index.js",
+    "source/components/position.js",
+    "source/components/stats.js",
+    "test/index.js",
+    "test/core/index.js",
+    "test/core/family.js",
+    "test/core/entity.js",
     "test/core/system.ls"
   ]
 }
