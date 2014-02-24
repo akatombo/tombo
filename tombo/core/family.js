@@ -55,7 +55,7 @@ Family.prototype.add = function add (entity) {
 		}
 
 		entity.on('component:removed', onComponentRemovedFromEntity, this);
-		this.entities.set(entity, node); 
+		this.entities.set(entity, node);
 	}
 	
 	return this;
@@ -91,7 +91,7 @@ Family.prototype.has = function has (entity) {
  * @return {Boolean}
 **/
 Family.prototype.match = function (entity) {
-	for (var [componentConstructor, componentName] of this.components) {
+	for (var componentConstructor of this.components.keys()) {
 		if (!entity.has(componentConstructor)) {
 			return false;
 		}

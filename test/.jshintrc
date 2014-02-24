@@ -14,6 +14,10 @@
   "globals": {
     "exports": true,
     "require": true,
-    "module": true
+    "module": true,
+    "mocha": true,
+    "it": true,
+    "describe": true,
+    "beforeEach": true
   }
 }

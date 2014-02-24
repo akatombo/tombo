@@ -1,0 +1,23 @@
+{
+  "name": "tombo",
+  "repo": "akatombo/tombo",
+  "description": "entity system game engine",
+  "version": "0.0.0",
+  "keywords": [
+    "entity",
+    "system",
+    "game",
+    "engine"
+  ],
+  "paths": [
+    "."
+  ],
+  "local": [
+    "tombo"
+  ],
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "license": "MIT"
+}

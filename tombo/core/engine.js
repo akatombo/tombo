@@ -77,7 +77,7 @@ Engine.prototype.run = function run (deltaTime) {
 	this.updating = true;
 	this.emit('run:start');
 
-	for (var [systemConstructor, system] of this.systems) {
+	for (var system of this.systems.values()) {
 		system.run(deltaTime, this.families.entities.values());
 	}
 

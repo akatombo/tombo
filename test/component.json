@@ -4,7 +4,7 @@
     ".."
   ],
   "dependencies": {
-    "visionmedia/mocha": "1.17.7",
+    "visionmedia/mocha": "1.17.1",
     "chaijs/chai": "1.9.0",
     "component/inherit": "0.0.3"
   },
@@ -20,6 +20,6 @@
     "specs/core/index.js",
     "specs/core/family.js",
     "specs/core/entity.js",
-    "specs/core/system.ls"
+    "specs/core/system.js"
   ]
 }
