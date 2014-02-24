@@ -16,10 +16,10 @@
     "index.js",
     "source/components/position.js",
     "source/components/stats.js",
-    "test/index.js",
-    "test/core/index.js",
-    "test/core/family.js",
-    "test/core/entity.js",
-    "test/core/system.ls"
+    "specs/index.js",
+    "specs/core/index.js",
+    "specs/core/family.js",
+    "specs/core/entity.js",
+    "specs/core/system.ls"
   ]
 }

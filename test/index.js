@@ -3,6 +3,6 @@ require('chai').should();
 
 mocha.setup('bdd');
 
-require('./test/index');
+require('./specs/index');
 
 mocha.run();
