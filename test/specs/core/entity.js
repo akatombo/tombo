@@ -1,5 +1,5 @@
 var Entity = require('tombo/core/entity');
-var Position = require('../../source/components/position');
+var Position = require('../../fixtures/components/position');
 
 var positionA = new Position(5, 7);
 var positionB = new Position(3, 1);

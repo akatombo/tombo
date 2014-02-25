@@ -14,8 +14,8 @@
   "main": "index.js",
   "scripts": [
     "index.js",
-    "source/components/position.js",
-    "source/components/stats.js",
+    "fixtures/components/position.js",
+    "fixtures/components/stats.js",
     "specs/index.js",
     "specs/core/index.js",
     "specs/core/family.js",
