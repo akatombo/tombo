@@ -17,7 +17,6 @@ function onComponentRemovedFromEntity (entity, component, componentConstructor) 
 function Family (schema) {
 	/**
 	 * @property entities
-	 * @private
 	 * @type {Map}
 	 * @default new Map()
 	**/
@@ -49,6 +48,7 @@ function Family (schema) {
 Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
 
+		// TODO: use pooling for nodes
 		var node = {};
 		for (var [componentConstructor, componentName] of this.components) {
 			node[componentName] = entity.get(componentConstructor);
@@ -70,6 +70,8 @@ Family.prototype.add = function add (entity) {
 Family.prototype.remove = function remove (entity) {
 	if (this.entities.has(entity)) {
 		entity.off('component:removed', onComponentRemovedFromEntity, this);
+
+		// TODO: use pooling for nodes
 		this.entities.delete(entity);
 	}
 

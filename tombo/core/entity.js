@@ -39,7 +39,7 @@ function Entity () {
  * Fired when a component is added
  *
  * @event component:added
- * @param {Object} entity
+ * @param {Entity} entity
  * @param {Component} component
  * @param {Function} componentConstructor
 **/
@@ -48,7 +48,7 @@ function Entity () {
  * Fired when a component is removed
  *
  * @event component:removed
- * @param {Object} entity
+ * @param {Entity} entity
  * @param {Component} component
  * @param {Function} componentConstructor
 **/

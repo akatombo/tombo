@@ -13,8 +13,5 @@
     "core/entity.js",
     "core/family.js",
     "core/system.js"
-  ],
-  "json": [
-    "component.json"
   ]
 }

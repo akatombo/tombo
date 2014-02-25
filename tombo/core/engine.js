@@ -23,7 +23,7 @@ function onComponentAddedToEntity (entity, component, componentConstructor) {
 function Engine () {
 	/**
 	 * @property updating
-	 * @private
+	 * @readonly
 	 * @type {Boolean}
 	 * @default false
 	**/
@@ -70,7 +70,7 @@ inherit(Engine, Emitter);
 /**
  * @method run
  * @chainable
- * @param {Number} delta-time
+ * @param {Number} deltaTime
  * @return {Engine}
 **/
 Engine.prototype.run = function run (deltaTime) {
@@ -156,7 +156,7 @@ Engine.prototype.removeEntity = function removeEntity (entity) {
 };
 
 /**
- * @method removeAllEntity
+ * @method removeAllEntities
  * @chainable
  * @return {Engine}
 **/
