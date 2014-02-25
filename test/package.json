@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "component-serve": "~0.5.2"
+    "component-serve": "~0.5.2",
+    "component-jscoverage": "~0.1.0"
   },
   "scripts": {
     "install": "component install",
