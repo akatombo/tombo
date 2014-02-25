@@ -15,5 +15,5 @@ describe('core', function () {
 
 	require('./entity');
 	require('./family');
-	require('./system');
+	require('./engine');
 });

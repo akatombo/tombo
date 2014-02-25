@@ -20,6 +20,6 @@
     "specs/core/index.js",
     "specs/core/family.js",
     "specs/core/entity.js",
-    "specs/core/system.js"
+    "specs/core/engine.js"
   ]
 }
