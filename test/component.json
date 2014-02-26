@@ -17,9 +17,8 @@
     "fixtures/components/position.js",
     "fixtures/components/stats.js",
     "specs/index.js",
-    "specs/core/index.js",
-    "specs/core/family.js",
-    "specs/core/entity.js",
-    "specs/core/engine.js"
+    "specs/family.js",
+    "specs/entity.js",
+    "specs/engine.js"
   ]
 }

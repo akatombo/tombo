@@ -1,8 +1,8 @@
-var Family = require('tombo/core/family');
-var Entity = require('tombo/core/entity');
+var Family = require('tombo/family');
+var Entity = require('tombo/entity');
 
-var Position = require('../../fixtures/components/position');
-var Stats = require('../../fixtures/components/stats');
+var Position = require('../fixtures/components/position');
+var Stats = require('../fixtures/components/stats');
 
 var position = new Position(3, 1);
 var stats = new Stats(200, 80);
