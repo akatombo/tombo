@@ -1,5 +1,5 @@
 /**
- * @module core
+ * @module tombo
 **/
 module.exports = Component;
 

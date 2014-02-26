@@ -6,7 +6,7 @@ var Entity = require('./entity');
 var System = require('./system');
 
 /**
- * @module core
+ * @module tombo
 **/
 module.exports = Engine;
 

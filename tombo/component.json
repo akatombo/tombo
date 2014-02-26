@@ -7,11 +7,10 @@
   "main": "index.js",
   "scripts": [
     "index.js",
-    "core/index.js",
-    "core/component.js",
-    "core/engine.js",
-    "core/entity.js",
-    "core/family.js",
-    "core/system.js"
+    "component.js",
+    "engine.js",
+    "entity.js",
+    "family.js",
+    "system.js"
   ]
 }

@@ -6,7 +6,7 @@ var Emitter = require('emitter');
 // TODO: .getAll() ?
 
 /**
- * @module core
+ * @module tombo
 **/
 module.exports = Entity;
 
