@@ -1,21 +1,20 @@
 {
   "name": "tombo-test-suite",
   "paths": [
-    ".."
+    "..",
+    "."
   ],
   "dependencies": {
     "visionmedia/mocha": "1.17.1",
-    "chaijs/chai": "1.9.0",
-    "component/inherit": "0.0.3"
+    "chaijs/chai": "1.9.0"
   },
   "local": [
-    "tombo"
+    "tombo",
+    "fixtures"
   ],
   "main": "index.js",
   "scripts": [
     "index.js",
-    "fixtures/components/position.js",
-    "fixtures/components/stats.js",
     "specs/index.js",
     "specs/family.js",
     "specs/entity.js",
