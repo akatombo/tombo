@@ -20,7 +20,7 @@ function Family (schema) {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	// KEY: entity instance | VALUE: entity node
+	// entity | node
 	this.entities = new Map();
 
 	/**
@@ -29,8 +29,13 @@ function Family (schema) {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	// KEY: component constructor | VALUE: component link name
+	// component constructor | property name
 	this.components = new Map();
+
+
+	/*
+	this.pool = new Pool();
+	*/
 
 	for (var componentName in schema) {
 		this.components.set(schema[componentName], componentName);
@@ -47,6 +52,10 @@ function Family (schema) {
 **/
 Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
+
+		/*
+		var node = this.pool.acquire();
+		*/
 
 		// TODO: use pooling for nodes
 		var node = {};
@@ -70,6 +79,10 @@ Family.prototype.add = function add (entity) {
 Family.prototype.remove = function remove (entity) {
 	if (this.entities.has(entity)) {
 		entity.off('component:removed', onComponentRemovedFromEntity, this);
+
+		/*
+		this.pool.release(this.entities.get(entity));
+		*/
 
 		// TODO: use pooling for nodes
 		this.entities.delete(entity);
