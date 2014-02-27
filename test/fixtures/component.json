@@ -13,6 +13,7 @@
   "scripts": [
     "index.js",
     "components/position.js",
-    "components/stats.js"
+    "components/velocity.js",
+    "components/health.js"
   ]
 }
