@@ -17,9 +17,10 @@ function System () {}
 System.prototype.require = {};
 
 /**
- * called for entities updates
  * @method run
  * @param {Number} deltaTime
- * @param {MapIterator} entities
+ * @param {MapIterator} nodes
+ * @param {Map} entities
+ * @param {Engine} engine
 **/
-System.prototype.run = function (deltaTime, entities) {};
+System.prototype.run = function (deltaTime, nodes, entities, engine) {};

@@ -43,6 +43,7 @@ function Engine () {
 	 * @type {Map}
 	 * @default new Map()
 	**/
+	// systemConstructor | system
 	this.systems = new Map();
 
 	/**
@@ -51,18 +52,15 @@ function Engine () {
 	 * @type {Map}
 	 * @default new Map()
 	**/
+	// systemConstructor | family
 	this.families = new Map();
 }
 
 /**
- * Fired when update start
- *
  * @event run:start
 **/
 
 /**
- * Fired when update is complete (all systems update)
- *
  * @event run:complete
 **/
 inherit(Engine, Emitter);
@@ -74,11 +72,13 @@ inherit(Engine, Emitter);
  * @return {Engine}
 **/
 Engine.prototype.run = function run (deltaTime) {
+	var family;
 	this.updating = true;
 	this.emit('run:start');
 
-	for (var system of this.systems.values()) {
-		system.run(deltaTime, this.families.entities.values());
+	for (var [system, systemConstructor] of this.systems) {
+		family = this.families.get(systemConstructor);
+		system.run(deltaTime, family.entities.values(), family.entities, this);
 	}
 
 	this.updating = false;
@@ -169,8 +169,6 @@ Engine.prototype.removeAllEntities = function removeAllEntities () {
 };
 
 /**
- * Add a system
- *
  * @method addSystem
  * @chainable
  * @param {System} system
@@ -178,6 +176,8 @@ Engine.prototype.removeAllEntities = function removeAllEntities () {
 **/
 Engine.prototype.addSystem = function addSystem (system) {
 	var systemConstructor = system.constructor;
+
+	// TODO : use only one family for systems with same require dependencies
 
 	this.systems.set(systemConstructor, system);
 	this.families.set(systemConstructor, new Family(system.require));
