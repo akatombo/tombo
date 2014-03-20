@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "component/inherit": "0.0.3",
-    "component/uid": "0.0.2",
+    "wryk/uid": "1.0.0",
     "wryk/emitter": "*"
   },
   "main": "index.js",

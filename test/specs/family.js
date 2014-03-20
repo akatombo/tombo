@@ -2,10 +2,10 @@ var Family = require('tombo/family');
 var Entity = require('tombo/entity');
 
 var Position = require('fixtures/components/position');
-var Stats = require('fixtures/components/stats');
+var Health = require('fixtures/components/health');
 
 var position = new Position(3, 1);
-var stats = new Stats(200, 80);
+var health = new Health(200, 80);
 
 describe('Family', function () {
 	var family;
@@ -14,7 +14,7 @@ describe('Family', function () {
 	beforeEach(function () {
 		family = new Family({
 			position: Position,
-			stats: Stats
+			health: Health
 		});
 
 		entity = new Entity();
@@ -25,7 +25,7 @@ describe('Family', function () {
 		it('should add entity if match', function () {
 			entity
 				.add(position)
-				.add(stats)
+				.add(health)
 			;
 
 			family.has(entity).should.be.false;
@@ -50,7 +50,7 @@ describe('Family', function () {
 		it('should remove entity', function () {
 			entity
 				.add(position)
-				.add(stats)
+				.add(health)
 			;
 
 			family.add(entity);
@@ -69,7 +69,7 @@ describe('Family', function () {
 		it('should return true', function () {
 			entity
 				.add(position)
-				.add(stats)
+				.add(health)
 			;
 
 			family.add(entity);
@@ -86,7 +86,7 @@ describe('Family', function () {
 		it('should return true if `entity` has all required components', function () {
 			entity
 				.add(position)
-				.add(stats)
+				.add(health)
 			;
 
 			family.add(entity);
