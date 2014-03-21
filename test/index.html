@@ -2,16 +2,11 @@
 	<head>
 		<meta charset="utf-8">
 		<title>tombo test suite</title>
-		<link rel="stylesheet" href="out/build.css" />
+		<link rel="stylesheet" href="build.css" />
 	</head>
 	<body>
 		<div id="mocha"></div>
-		<script>
-			if (!~navigator.userAgent.toLowerCase().indexOf('firefox')) {
-				throw new Error("you should use Firefox because some es6 features are only supported on Firefox\n");
-			}
-		</script>
-		<script src="out/build.js"></script>
+		<script src="build.js"></script>
 		<script> require('tombo-test-suite'); </script>
 	</body>
 </html>

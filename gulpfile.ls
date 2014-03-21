@@ -1,66 +1,35 @@
-require! {
-	g: 'gulp'
+require! 'gulp'
+globalize!
 
-	prepend: 'gulp-header'
-	rename: 'gulp-rename'
-
-	component: 'gulp-component'
-	lint: 'gulp-jshint'
-	minify: 'gulp-uglify'
-
-	configuration: './component.json'
-}
-
-
-for [name, alias] in [ <[task]> <[run]> <[watch]> <[src from]> <[dest to]> ]
-	global[alias || name] = g[name]bind g
-
-{ name, version } = configuration
-{ production } = g.env
-
-
-
-
-
-root = './component.json'
-scripts = './scripts/**/*.js'
-banner = "/* #{name} - v#{version} */\n"
-
+{ name, version } = require './component.json'
 
 task 'default' ->
-	console.log 'default task'
-
+	...
 
 task 'build' ->
-	folder = './build/'
-	options = {}
+	# TODO: find module can minify es6
+	from './component.json'
+		.pipe (require 'gulp-component') standalone: name
+		.pipe (require 'gulp-rename') (!-> it.basename = name)
+		.pipe (require 'gulp-prepend') "/* #{name} - v#{version} */\n"
+		.pipe to './build/'
 
-	if production
-		folder = '.'
-		options.standalone = name
+task 'development' (done) !->
+	require! 'express'
+	root = (require 'path').join process.cwd!, '/test'
 
-		from root
-			.pipe component options
-			.pipe minify!
-			.pipe prepend banner
-			.pipe rename (dirname, basename, extension) -> "#{name}.min#{extension}"
-			.pipe to folder
-
-	from root
-		.pipe component options
-		.pipe prepend banner
-		.pipe rename (dirname, basename, extension) -> "#{name}#{extension}"
-		.pipe to folder	
-
+	server = express!
+		..use express.static root
+		..use '/' (require 'component-serve') {+require, +dev, root}
+		..listen 3000
 
 task 'lint' ->
-	from scripts
-		.pipe lint!
-		.pipe lint.reporter require 'jshint-stylish'
+	...
+	from 'tombo/**/*.js'
+		.pipe (require 'gulp-jshint')!
 
 
-task 'watch' ->
-	run 'build'
 
-	watch [root, scripts] !->
-		run 'build'
+function globalize
+	for [name, alias] in [ <[task]> <[watch]> <[src from]> <[dest to]> ]
+		global[alias || name] = gulp[name]bind gulp
