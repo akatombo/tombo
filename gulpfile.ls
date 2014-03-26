@@ -31,7 +31,7 @@ task 'development' <[symlink]> (done) !->
 	root = require 'path' .join __dirname, 'test'
 	server = express!
 		..use express.static root
-		..use '/' serve { root, +dev, +require }
+		..use '/' serve { root, +dev, +require /*, plugins: [coverage] */ }
 		..listen 3000 -> done console.log "development server running on port 3000"
 
 task 'documentation' -> ...
