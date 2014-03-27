@@ -14,19 +14,14 @@
     "wryk/uid": "1.0.0",
     "wryk/emitter": "*"
   },
-  "main": "tombo/index.js",
+  "main": "index.js",
   "scripts": [
-    "tombo/index.js",
-    "tombo/component.js",
-    "tombo/engine.js",
-    "tombo/entity.js",
-    "tombo/family.js",
-    "tombo/system.js"
+    "index.js",
+    "component.js",
+    "engine.js",
+    "entity.js",
+    "family.js",
+    "system.js"
   ],
-  "development": {
-    "yields/coverage": "*",
-    "visionmedia/mocha": "*",
-    "chaijs/chai": "*"
-  },
   "license": "MIT"
 }

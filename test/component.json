@@ -1,7 +1,6 @@
 {
   "name": "tombo-test-suite",
   "paths": [
-    "..",
     "."
   ],
   "dependencies": {
@@ -12,9 +11,9 @@
     "tombo",
     "fixtures"
   ],
-  "main": "index.js",
+  "main": "runner.js",
   "scripts": [
-    "index.js",
+    "runner.js",
     "specs/index.js",
     "specs/family.js",
     "specs/entity.js",

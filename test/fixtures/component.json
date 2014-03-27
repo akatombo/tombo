@@ -1,7 +1,7 @@
 {
   "name": "fixtures",
   "paths": [
-    "../.."
+    ".."
   ],
   "dependencies": {
     "component/inherit": "0.0.3"
