@@ -8,6 +8,7 @@ require! {
 	rename: 'gulp-rename'
 	symlink: 'gulp-symlink'
 
+	express: 'express'
 	coverage: 'component-jscoverage'
 	serve: 'component-serve'
 
@@ -27,8 +28,6 @@ task 'build' ->
 		.pipe to 'build'
 
 task 'development' <[symlink documentation lint]> (done) !->
-	require! 'express'
-
 	watch '*.js' <[documentation lint]>
 
 	root = require 'path' .join __dirname, 'test'
@@ -54,14 +53,13 @@ task 'lint' ->
 			+expr
 			+freeze
 			+funcscope
+			globals: {+module, +exports, +require}
+			indent: 4
 			+newcap
 			+trailing
 			+undef
-		} <<< do
-			indent: 4
 			unused: 'vars'
-			globals: {+module, +exports, +require}
-
+		}
 		.pipe lint.reporter stylish
 
 task 'symlink' ->
