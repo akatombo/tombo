@@ -29,7 +29,7 @@ task 'build' ->
 task 'development' <[symlink documentation lint]> (done) !->
 	require! 'express'
 
-	watch '*.js' <[documenation lint]>
+	watch '*.js' <[documentation lint]>
 
 	root = require 'path' .join __dirname, 'test'
 	server = express!
