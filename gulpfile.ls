@@ -1,6 +1,7 @@
-globalize require 'gulp'
-
 require! {
+	gulp: 'gulp'
+	express: 'express'
+
 	component: 'gulp-component'
 	documentation: 'gulp-yuidoc'
 	lint: 'gulp-jshint'
@@ -15,16 +16,27 @@ require! {
 	stylish: 'jshint-stylish'
 }
 
+globalize gulp
+
 {name, repo, description, license, version} = require './component.json'
+
+banner = """
+	/*
+		#{name} - #{version}
+		https://github.com/#{repo}
+		#{license}
+	*/
+
+"""
 
 task 'default' <[build]>
 
 task 'build' ->
-	# TODO: find module can minify es6
+	# TODO: add minification with .min.js file (need es6 minifier)
 	from 'component.json'
 		.pipe component standalone: name
 		.pipe rename (!-> it.basename = name)
-		.pipe prepend "/* #{name} - v#{version} (#{license}) */\n"
+		.pipe prepend banner
 		.pipe to 'build'
 
 task 'development' <[symlink documentation lint]> (done) !->
@@ -71,4 +83,4 @@ function log
 
 function globalize
 	for [name, alias] in [ <[task]> <[watch]> <[src from]> <[dest to]> ]
-		global[alias || name] = it[name]bind it
+		global[alias || name] = it~[name]

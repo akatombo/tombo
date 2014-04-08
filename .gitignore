@@ -1,6 +1,7 @@
-npm-debug.log
+*.log
 
-documentation
+build
 components
+documentation
 node_modules
 tombo
