@@ -57,7 +57,8 @@ Family.prototype.add = function add (entity) {
 		var node = this.pool.acquire();
 		*/
 
-		// TODO: use pooling for nodes
+		// TODO: use pooling for nodes (concept: https://gist.github.com/wryk/9483867)
+		// TODO: use prototypeless object for node (https://gist.github.com/wryk/9483931)
 		var node = {};
 		for (var [componentConstructor, componentName] of this.components) {
 			node[componentName] = entity.get(componentConstructor);
