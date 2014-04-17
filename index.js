@@ -2,7 +2,7 @@
  * @module tombo
  * @main tombo
 **/
-module.exports = {
+export default = {
 	Component: require('./component'),
 	Engine: require('./engine'),
 	Entity: require('./entity'),

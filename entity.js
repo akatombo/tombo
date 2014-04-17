@@ -1,6 +1,6 @@
-var inherit = require('inherit');
-var uid = require('uid');
-var Emitter = require('emitter');
+import inherit from 'inherit';
+import uid from 'uid';
+import Emitter from 'emitter';
 
 // TODO: .removeAll() ?
 // TODO: .getAll() ?
@@ -8,7 +8,7 @@ var Emitter = require('emitter');
 /**
  * @module tombo
 **/
-module.exports = Entity;
+export default Entity;
 
 /**
  * @class Entity

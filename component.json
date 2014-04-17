@@ -1,6 +1,6 @@
 {
   "name": "tombo",
-  "repo": "akatombo/tombo",
+  "repository": "akatombo/tombo",
   "description": "entity system game engine",
   "version": "0.0.0",
   "keywords": [

@@ -16,11 +16,11 @@
     "jshint-stylish": "~0.1.5"
   },
   "scripts": {
-    "build": "gulp build --require LiveScript",
-    "development": "gulp development --require LiveScript",
+    "build": "",
+    "development": "",
     "documentation": "gulp documentation --require LiveScript",
-    "install": "component-install && cd test && npm install",
+    "install": "",
     "lint": "gulp lint --require LiveScript",
-    "test": "gulp development --require LiveScript"
+    "test": ""
   }
 }

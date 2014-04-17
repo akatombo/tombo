@@ -1,20 +1,14 @@
-var inherit = require('inherit');
-var Emitter = require('emitter');
+import inherit from 'inherit';
+import Emitter from 'emitter';
 
-var Family = require('./family');
-var Entity = require('./entity');
-var System = require('./system');
+import Family from './family.js';
+import Entity from './entity.js';
+import System from './system.js';
 
 /**
  * @module tombo
 **/
-module.exports = Engine;
-
-function onComponentAddedToEntity (entity, component, componentConstructor) {
-	for (var family of this.families.values()) {
-		family.add(entity);
-	}
-}
+export default Engine;
 
 /**
  * @class Engine
@@ -210,3 +204,9 @@ Engine.prototype.removeAllSystems = function removeAllSystems () {
 
 	return this;
 };
+
+function onComponentAddedToEntity (entity, component, componentConstructor) {
+	for (var family of this.families.values()) {
+		family.add(entity);
+	}
+}

@@ -1,7 +1,7 @@
 /**
  * @module tombo
 **/
-module.exports = System;
+export default System;
 
 /**
  * @class System

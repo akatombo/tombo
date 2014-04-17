@@ -1,7 +1,7 @@
-var Component = require('tombo/component');
-var inherit = require('inherit');
+import Component from 'tombo/component.js';
+import inherit from 'inherit';
 
-module.exports = Health;
+export default Health;
 
 function Health (max, current) {
 	this.max = max;

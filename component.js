@@ -1,7 +1,7 @@
 /**
  * @module tombo
 **/
-module.exports = Component;
+export default Component;
 
 /**
  * @class Component

@@ -1,7 +1,7 @@
-var Component = require('tombo/component');
-var inherit = require('inherit');
+import Component from 'tombo/component.js';
+import inherit from 'inherit';
 
-module.exports = Position;
+export default Position;
 
 function Position (x, y) {
 	this.x = x;

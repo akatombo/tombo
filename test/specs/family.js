@@ -1,8 +1,8 @@
-var Family = require('tombo/family');
-var Entity = require('tombo/entity');
+import Family from 'tombo/family.js';
+import Entity from 'tombo/entity.js';
 
-var Position = require('fixtures/components/position');
-var Health = require('fixtures/components/health');
+import Position from '../fixtures/components/position.js';
+import Health from '../fixtures/components/health.js';
 
 var position = new Position(3, 1);
 var health = new Health(200, 80);

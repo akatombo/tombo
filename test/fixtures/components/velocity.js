@@ -1,7 +1,7 @@
-var Component = require('tombo/component');
-var inherit = require('inherit');
+import Component from 'tombo/component.js';
+import inherit from 'inherit';
 
-module.exports = Velocity;
+export default Velocity;
 
 function Velocity (x, y) {
 	this.x = x;

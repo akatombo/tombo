@@ -1,13 +1,7 @@
 /**
  * @module tombo
 **/
-module.exports = Family;
-
-function onComponentRemovedFromEntity (entity, component, componentConstructor) {
-	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
-		this.remove(entity);
-	}
-}
+export default Family;
 
 /**
  * @class Family
@@ -115,3 +109,9 @@ Family.prototype.match = function (entity) {
 
 	return true;
 };
+
+function onComponentRemovedFromEntity (entity, component, componentConstructor) {
+	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
+		this.remove(entity);
+	}
+}

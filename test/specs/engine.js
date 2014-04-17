@@ -1,4 +1,4 @@
-var Engine = require('tombo/engine');
+import Engine from 'tombo/engine.js';
 
 describe("Engine", function () {
 	describe("#run(deltaTime)", function () {
