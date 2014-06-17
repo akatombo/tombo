@@ -10,9 +10,12 @@
     "engine"
   ],
   "dependencies": {
-    "component/inherit": "0.0.3",
-    "wryk/uid": "1.0.0",
-    "wryk/emitter": "*"
+    "component/inherit": "^0.0.3",
+    "wryk/uid": "^1.0.0",
+    "wryk/emitter": "*",
+    "wryk/prototypeless-object": "^1.0.1",
+    "wryk/map": "^2.1.0",
+    "wryk/set": "^2.0.0"
   },
   "main": "index.js",
   "scripts": [

@@ -4,16 +4,13 @@
     "visionmedia/mocha": "1.17.1",
     "chaijs/chai": "1.9.0",
     "component/inherit": "0.0.3",
-    "akatombo/tombo": "0.0.0"
+    "akatombo/tombo": "*"
   },
+  "paths": ["."],
+  "locals": ["game-of-life"],
   "main": "index.js",
   "scripts": [
     "index.js",
-
-    "fixtures/components/health.js",
-    "fixtures/components/position.js",
-    "fixtures/components/velocity.js",
-
     "specs/index.js",
     "specs/engine.js",
     "specs/entity.js",

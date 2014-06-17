@@ -1,11 +1,11 @@
 import Family from 'tombo/family.js';
 import Entity from 'tombo/entity.js';
 
-import Position from '../fixtures/components/position.js';
-import Health from '../fixtures/components/health.js';
+// import Position from 'game-of-life/component/position.js';
+import State from 'game-of-life/component/state.js';
 
-var position = new Position(3, 1);
-var health = new Health(200, 80);
+var position = new Position(0, 0);
+var state = new State(State.ALIVE);
 
 describe("Family", function () {
 	var family;
@@ -14,7 +14,7 @@ describe("Family", function () {
 	beforeEach(function () {
 		family = new Family({
 			position: Position,
-			health: Health
+			state: State
 		});
 
 		entity = new Entity();
@@ -24,7 +24,7 @@ describe("Family", function () {
 		it("should add `entity` when `entity` match with family components", function () {
 			entity
 				.add(position)
-				.add(health)
+				.add(state)
 			;
 
 			family.has(entity).should.be.false;
@@ -48,7 +48,7 @@ describe("Family", function () {
 		it("should remove `entity`", function () {
 			entity
 				.add(position)
-				.add(health)
+				.add(state)
 			;
 
 			family.add(entity);
@@ -66,7 +66,7 @@ describe("Family", function () {
 		it("should return true when family has `entity`", function () {
 			entity
 				.add(position)
-				.add(health)
+				.add(state)
 			;
 
 			family.add(entity);
@@ -82,7 +82,7 @@ describe("Family", function () {
 		it("should return true when `entity` has all required components", function () {
 			entity
 				.add(position)
-				.add(health)
+				.add(state)
 			;
 
 			family.add(entity);

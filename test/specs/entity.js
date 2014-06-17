@@ -1,98 +1,98 @@
 import Entity from 'tombo/entity.js';
-import Position from '../fixtures/components/position.js';
+// import Position from 'game-of-life/component/position.js';
 
-var positionA = new Position(5, 7);
-var positionB = new Position(3, 1);
+var top = new Position(0, 0);
+var bottom = new Position(1, 1);
 
 describe("Entity", function () {
-	var tree;
+	var cell;
 
 	beforeEach(function () {
-		tree = new Entity();
+		cell = new Entity();
 	});
 
 	describe("#add(component)", function () {
 		it("should add `component`", function () {
-			tree.has(Position).should.be.false;
+			cell.has(Position).should.be.false;
 
-			tree.add(positionA);
-			tree.has(Position).should.be.true;
-			tree.get(Position).should.be.equal(positionA);
+			cell.add(top);
+			cell.has(Position).should.be.true;
+			cell.get(Position).should.be.equal(top);
 		});
 
 		it("should overwrite with `component`", function () {
-			tree.has(Position).should.be.false;
+			cell.has(Position).should.be.false;
 
-			tree.add(positionA);
-			tree.has(Position).should.be.true;
-			tree.get(Position).should.be.equal(positionA);
+			cell.add(top);
+			cell.has(Position).should.be.true;
+			cell.get(Position).should.be.equal(top);
 
-			tree.add(positionB);
-			tree.has(Position).should.be.true;
-			tree.get(Position).should.be.equal(positionB);
+			cell.add(bottom);
+			cell.has(Position).should.be.true;
+			cell.get(Position).should.be.equal(bottom);
 		});
 
 		it("should emit `component:added` event with (entity, component, componentConstructor)", function (done) {
-			tree.once('component:added', function (entity, component, componentConstructor) {
-				entity.should.be.equal(tree);
-				component.should.be.equal(positionA);
+			cell.once('component:added', function (entity, component, componentConstructor) {
+				entity.should.be.equal(cell);
+				component.should.be.equal(top);
 				componentConstructor.should.be.equal(Position);
 
 				done();
 			});
 
-			tree.add(positionA);
+			cell.add(top);
 		});
 
 		it("should be chainable", function () {
-			tree.add(positionA).should.be.equal(tree);
+			cell.add(top).should.be.equal(cell);
 		});
 	});
 
 	describe("#remove(componentConstructor)", function () {
 		it("should remove component", function () {
-			tree.add(positionA);
-			tree.has(Position).should.be.true;
+			cell.add(top);
+			cell.has(Position).should.be.true;
 
-			tree.remove(Position);
-			tree.has(Position).should.be.false;
+			cell.remove(Position);
+			cell.has(Position).should.be.false;
 
 		});
 
 		it("should emit `component:removed` event with (entity, component, componentConstructor)", function (done) {
-			tree.add(positionA);
+			cell.add(top);
 
-			tree.once('component:removed', function (entity, component, componentConstructor) {
-				entity.should.be.equal(tree);
-				component.should.be.equal(positionA);
+			cell.once('component:removed', function (entity, component, componentConstructor) {
+				entity.should.be.equal(cell);
+				component.should.be.equal(top);
 				componentConstructor.should.be.equal(Position);
 
 				done();
 			});
 
-			tree.remove(Position);
+			cell.remove(Position);
 		});
 
 		it("should be chainable", function () {
-			tree.remove(Position).should.be.equal(tree);
+			cell.remove(Position).should.be.equal(cell);
 		});
 	});
 
 	describe("#has(componentConstructor)", function () {
 		it("should return true when `componentConstructor` is defined", function () {
-			tree.add(positionA);
-			tree.has(Position).should.be.true;
+			cell.add(top);
+			cell.has(Position).should.be.true;
 		});
 
 		it("should return false when `componentConstructor` is undefined", function () {
-			tree.has(Position).should.be.false;
+			cell.has(Position).should.be.false;
 		});
 	});
 
 	describe("#has(componentConstructor)", function () {
 		it("should return defined `componentConstructor` instance", function () {
-			tree.add(positionA);
-			tree.get(Position).should.be.equal(positionA);
+			cell.add(top);
+			cell.get(Position).should.be.equal(top);
 		});
 	});
 });

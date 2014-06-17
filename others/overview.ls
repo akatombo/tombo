@@ -1,18 +1,15 @@
-{ Component, Engine, Entity, System } = require 'tombo'
+{Component, Engine, Entity, System} = require 'tombo'
 
-# or -take a look at component(1)-
-
-Component = require 'tombo/component'
-Engine = require 'tombo/engine'
-Entity = require 'tombo/entity'
-System = require 'tombo/system'
-
+# COMPONENTS
 class Position extends Component
 	(@x, @y) !->
+
 
 class Sprite extends Component
 	(@image) !->
 
+
+# SYSTEMS
 class Render extends System
 	(@canvas) !->
 		@context = @canvas.get-context '2d'
@@ -23,25 +20,21 @@ class Render extends System
 
 	# do something and display that fucking sprite at the right position
 	# in the RenderSystem case, delta-time is useless :)
-	run: (delta-time, entities) !->
+	run: (delta-time, nodes, entities, engine) !->
 		@context.clearRect 0, 0, @canvas.width, @canvas.height
 
-		for entity in entities
-			@context.draw-image entity.sprite.image, entity.position.x, entity.position.y
+		for {sprite: {image}, position: {x, y}} in nodes
+			@context.draw-image image, x, y
 
 
-
-
-
-
-
-canvas-2d-context = ... # canvas like object
-hatsune-miku-sprite = ... # preload image
+# glue them all !
+canvas = ... # canvas object
+hatsune-miku-sprite = ... # image object
 
 game = new Engine! # create a new game engine
 
 hatsune-miku = new Entity! # initialize a new entity
-hastune-miku # add some components to entity
+hastune-miku # add some components
 	.add new Position 10 30
 	.add new Sprite hastune-miku-sprite
 

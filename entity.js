@@ -1,6 +1,7 @@
 import inherit from 'inherit';
 import uid from 'uid';
 import Emitter from 'emitter';
+import Map from 'map';
 
 // TODO: .removeAll() ?
 // TODO: .getAll() ?

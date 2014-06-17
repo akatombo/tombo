@@ -1,0 +1,15 @@
+{
+  "name": "game-of-life",
+  "dependencies": {
+    "akatombo/tombo": "*"
+  },
+  "main": "index.js",
+  "scripts": [
+    "index.js",
+    "component/position.js",
+    "component/state.js",
+    "entity/cell.js",
+    "system/cell-cycle.js",
+    "system/render.js"
+  ]
+}

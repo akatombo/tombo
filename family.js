@@ -1,3 +1,6 @@
+import PrototypelessObject from 'prototypeless-object';
+import Map from 'map';
+
 /**
  * @module tombo
 **/
@@ -14,7 +17,7 @@ function Family (schema) {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	// entity | node
+	// key:entity{object}, value:node{object}
 	this.entities = new Map();
 
 	/**
@@ -23,15 +26,17 @@ function Family (schema) {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	// component constructor | property name
+	// key:componentConstructor{function}, value:componentName{string}
 	this.components = new Map();
 
 
 	/*
 	this.pool = new Pool();
 	*/
-
-	for (var componentName in schema) {
+	var componentName;
+	var keys = Object.keys(schema);
+	for (var i = -1, l = keys.length; ++i < l;) {
+		componentName = keys[i];
 		this.components.set(schema[componentName], componentName);
 	}
 
@@ -47,15 +52,15 @@ function Family (schema) {
 Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
 
-		/*
-		var node = this.pool.acquire();
-		*/
-
 		// TODO: use pooling for nodes (concept: https://gist.github.com/wryk/9483867)
-		// TODO: use prototypeless object for node (https://gist.github.com/wryk/9483931)
-		var node = {};
-		for (var [componentConstructor, componentName] of this.components) {
-			node[componentName] = entity.get(componentConstructor);
+		// var node = this.pool.acquire();
+		
+		var node = new PrototypelessObject();
+
+		var keys = this.components.keys;
+		var values = this.components.values;
+		for (var i = -1, l = keys.length; ++i < l;) {
+			node[values[i]] = entity.get(keys[i]);
 		}
 
 		entity.on('component:removed', onComponentRemovedFromEntity, this);
@@ -75,11 +80,9 @@ Family.prototype.remove = function remove (entity) {
 	if (this.entities.has(entity)) {
 		entity.off('component:removed', onComponentRemovedFromEntity, this);
 
-		/*
-		this.pool.release(this.entities.get(entity));
-		*/
-
 		// TODO: use pooling for nodes
+		// this.pool.release(this.entities.get(entity));
+		
 		this.entities.delete(entity);
 	}
 
@@ -101,8 +104,9 @@ Family.prototype.has = function has (entity) {
  * @return {Boolean}
 **/
 Family.prototype.match = function (entity) {
-	for (var componentConstructor of this.components.keys()) {
-		if (!entity.has(componentConstructor)) {
+	var keys = this.components.keys;
+	for (var i = -1, l = keys.length; ++i < l;) {
+		if (!entity.has(keys[i])) {
 			return false;
 		}
 	}
@@ -111,7 +115,7 @@ Family.prototype.match = function (entity) {
 };
 
 function onComponentRemovedFromEntity (entity, component, componentConstructor) {
-	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
+	if (this.components.has(componentConstructor) && this.entities.has(entity)) {
 		this.remove(entity);
 	}
 }

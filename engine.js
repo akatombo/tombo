@@ -1,5 +1,7 @@
 import inherit from 'inherit';
 import Emitter from 'emitter';
+import Set from 'set';
+import Map from 'map';
 
 import Family from './family.js';
 import Entity from './entity.js';
@@ -37,7 +39,7 @@ function Engine () {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	// systemConstructor | system
+	// key:systemConstructor{function}, value:system{object}
 	this.systems = new Map();
 
 	/**
@@ -46,37 +48,39 @@ function Engine () {
 	 * @type {Map}
 	 * @default new Map()
 	**/
-	// systemConstructor | family
+	// key:systemConstructor{function}, value:family{object}
 	this.families = new Map();
 }
 
 /**
- * @event run:start
+ * @event update:start
 **/
 
 /**
- * @event run:complete
+ * @event update:complete
 **/
 inherit(Engine, Emitter);
 
 /**
- * @method run
+ * @method update
  * @chainable
  * @param {Number} deltaTime
  * @return {Engine}
 **/
-Engine.prototype.run = function run (deltaTime) {
+Engine.prototype.update = function update (deltaTime) {
 	var family;
 	this.updating = true;
-	this.emit('run:start');
+	this.emit('update:start');
 
-	for (var [system, systemConstructor] of this.systems) {
-		family = this.families.get(systemConstructor);
-		system.run(deltaTime, family.entities.values(), family.entities, this);
+	var keys = this.systems.keys;
+	var values = this.systems.values;
+	for (var i = -1, l = keys.length; ++i < l;) {
+		family = this.families.get(keys[i]);
+		values[i].update(deltaTime, family.entities.values, family.entities, this);
 	}
 
 	this.updating = false;
-	this.emit('run:complete');
+	this.emit('update:complete');
 
 	return this;
 };
@@ -122,8 +126,9 @@ Engine.prototype.remove = function remove (entityOrSystem) {
 Engine.prototype.addEntity = function addEntity (entity) {
 	entity.on('component:added', onComponentAddedToEntity, this);
 
-	for (var family of this.families.values()) {
-		family.add(entity);
+	var values = this.families.values;
+	for (var i = -1, l = values.length; ++i < l;) {
+		values[i].add(entity);
 	}
 
 	this.entities.add(entity);
@@ -140,8 +145,9 @@ Engine.prototype.addEntity = function addEntity (entity) {
 Engine.prototype.removeEntity = function removeEntity (entity) {
 	entity.off('component:added', onComponentAddedToEntity, this);
 
-	for (var family of this.families.values()) {
-		family.remove(entity);
+	var values = this.families.values;
+	for (var i = -1, l = values.length; ++i < l;) {
+		values[i].remove(entity);
 	}
 
 	this.entities.delete(entity);
@@ -155,8 +161,9 @@ Engine.prototype.removeEntity = function removeEntity (entity) {
  * @return {Engine}
 **/
 Engine.prototype.removeAllEntities = function removeAllEntities () {
-	for (var entity of this.entities) {
-		this.removeEntity(entity);
+	var values = this.entities.values;
+	for (var i = -1, l = values.length; ++i < l;) {
+		this.removeEntity(values[i]);
 	}
 
 	return this;
@@ -171,7 +178,7 @@ Engine.prototype.removeAllEntities = function removeAllEntities () {
 Engine.prototype.addSystem = function addSystem (system) {
 	var systemConstructor = system.constructor;
 
-	// TODO : use only one family for systems with same require dependencies
+	// TODO : use only one family for systems with same dependencies
 
 	this.systems.set(systemConstructor, system);
 	this.families.set(systemConstructor, new Family(system.require));
@@ -198,15 +205,17 @@ Engine.prototype.removeSystem = function removeSystem (systemConstructor) {
  * @return {Engine}
 **/
 Engine.prototype.removeAllSystems = function removeAllSystems () {
-	for (var systemConstructor of this.systems.keys()) {
-		this.removeSystem(systemConstructor);
+	var keys = this.systems.keys;
+	for (var i = -1, l = keys.length; ++i < l;) {
+		this.removeSystem(keys[i]);
 	}
 
 	return this;
 };
 
 function onComponentAddedToEntity (entity, component, componentConstructor) {
-	for (var family of this.families.values()) {
-		family.add(entity);
+	var values = this.families.values;
+	for (var i = -1, l = values.length; ++i < l;) {
+		values[i].add(entity);
 	}
 }

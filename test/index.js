@@ -1,3 +1,5 @@
+console.log(require.modules)
+
 import 'mocha';
 import chai from 'chai'
 
