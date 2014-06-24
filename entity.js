@@ -22,7 +22,7 @@ function Entity () {
 	 * @readonly
 	 * @type {String}
 	**/
-	this.$id = uid();
+	this.uid = uid();
 
 	/**
 	 * Contains all components attached to the entity

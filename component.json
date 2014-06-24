@@ -11,7 +11,9 @@
   ],
   "dependencies": {
     "component/inherit": "0.0.3",
-    "wryk/uid": "1.0.0",
+    "akatombo/pool" : "*",
+    "MatthewMueller/uid": "0.0.2",
+    "wryk/prototypeless-object": "1.0.1",
     "wryk/emitter": "*"
   },
   "main": "index.js",
