@@ -1,6 +1,8 @@
 /**
  * @module tombo
 **/
+import PrototypelessObject from 'prototypeless-object';
+
 export default Family;
 
 /**
@@ -53,7 +55,7 @@ Family.prototype.add = function add (entity) {
 
 		// TODO: use pooling for nodes (concept: https://gist.github.com/wryk/9483867)
 		// TODO: use prototypeless object for node (https://gist.github.com/wryk/9483931)
-		var node = {};
+		var node = new PrototypelessObject();
 		for (var [componentConstructor, componentName] of this.components) {
 			node[componentName] = entity.get(componentConstructor);
 		}
