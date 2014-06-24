@@ -60,23 +60,23 @@ function Engine () {
 inherit(Engine, Emitter);
 
 /**
- * @method run
+ * @method update
  * @chainable
  * @param {Number} deltaTime
  * @return {Engine}
 **/
-Engine.prototype.run = function run (deltaTime) {
+Engine.prototype.update = function update (deltaTime) {
 	var family;
 	this.updating = true;
-	this.emit('run:start');
+	this.emit('update:start');
 
 	for (var [system, systemConstructor] of this.systems) {
 		family = this.families.get(systemConstructor);
-		system.run(deltaTime, family.entities.values(), family.entities, this);
+		system.update(deltaTime, family.entities.values(), family.entities, this);
 	}
 
 	this.updating = false;
-	this.emit('run:complete');
+	this.emit('update:complete');
 
 	return this;
 };
