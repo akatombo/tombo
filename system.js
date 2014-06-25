@@ -1,23 +1,19 @@
-/**
- * @module tombo
-**/
+/** @module tombo/system **/
+
 export default System;
 
 /**
- * @class System
- * @constructor
+ * @abstract @class
 **/
 function System () {}
 
 /**
- * @property require
  * @type {Object}
- * @default {}
 **/
 System.prototype.require = {};
 
 /**
- * @method update
+ * @abstract @method
  * @param {Number} deltaTime
  * @param {MapIterator} nodes
  * @param {Map} entities

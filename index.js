@@ -1,7 +1,5 @@
-/**
- * @module tombo
- * @main tombo
-**/
+/** @module tombo **/
+
 export default = {
 	Component: require('./component'),
 	Engine: require('./engine'),
