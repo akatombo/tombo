@@ -25,5 +25,23 @@
     "family.js",
     "system.js"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "development": {
+    "dependencies": {
+      "visionmedia/mocha": "1.17.1",
+      "chaijs/chai": "1.9.0"
+    },
+    "scripts": [
+      "test/index.js",
+
+      "test/specs/index.js",
+      "test/specs/engine.js",
+      "test/specs/entity.js",
+      "test/specs/family.js",
+
+      "test/fixtures/components/health.js",
+      "test/fixtures/components/position.js",
+      "test/fixtures/components/velocity.js"
+    ]
+  }
 }
