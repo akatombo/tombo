@@ -32,12 +32,11 @@
       "chaijs/chai": "1.9.0"
     },
     "scripts": [
-      "test/index.js",
-
-      "test/specs/index.js",
-      "test/specs/engine.js",
-      "test/specs/entity.js",
-      "test/specs/family.js",
+      "test/unit/index.js",
+      "test/unit/tombo.js",
+      "test/unit/engine.js",
+      "test/unit/entity.js",
+      "test/unit/family.js",
 
       "test/fixtures/components/health.js",
       "test/fixtures/components/position.js",
