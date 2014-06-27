@@ -76,7 +76,7 @@ Engine.prototype.update = function update (deltaTime) {
 	}
 
 	this.updating = false;
-	this.emit('update:complete');
+	this.emit('update:end');
 
 	return this;
 };
