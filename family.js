@@ -1,29 +1,23 @@
-/**
- * @module tombo
-**/
+/** @module tombo/family **/
+
 import PrototypelessObject from 'prototypeless-object';
 
 export default Family;
 
 /**
- * @class Family
- * @constructor
+ * @class
  * @param {Object} schema
 **/
 function Family (schema) {
 	/**
-	 * @property entities
 	 * @type {Map}
-	 * @default new Map()
 	**/
 	// entity | node
 	this.entities = new Map();
 
 	/**
-	 * @property components
 	 * @private
 	 * @type {Map}
-	 * @default new Map()
 	**/
 	// component constructor | property name
 	this.components = new Map();
@@ -33,7 +27,7 @@ function Family (schema) {
 	this.pool = new Pool();
 	*/
 
-	for (var componentName in schema) {
+	for (let componentName in schema) {
 		this.components.set(schema[componentName], componentName);
 	}
 
@@ -41,22 +35,17 @@ function Family (schema) {
 }
 
 /**
- * @method add
- * @chainable
+ * @method
  * @param {Entity} entity
  * @return {Family}
 **/
 Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
-
-		/*
-		var node = this.pool.acquire();
-		*/
-
 		// TODO: use pooling for nodes (concept: https://gist.github.com/wryk/9483867)
-		// TODO: use prototypeless object for node (https://gist.github.com/wryk/9483931)
-		var node = new PrototypelessObject();
-		for (var [componentConstructor, componentName] of this.components) {
+		// var node = this.pool.acquire();
+
+		let node = new PrototypelessObject();
+		for (let [componentConstructor, componentName] of this.components) {
 			node[componentName] = entity.get(componentConstructor);
 		}
 
@@ -68,8 +57,7 @@ Family.prototype.add = function add (entity) {
 };
 
 /**
- * @method remove
- * @chainable
+ * @method
  * @param {Entity} entity
  * @return {Family}
 **/
@@ -77,11 +65,9 @@ Family.prototype.remove = function remove (entity) {
 	if (this.entities.has(entity)) {
 		entity.off('component:removed', onComponentRemovedFromEntity, this);
 
-		/*
-		this.pool.release(this.entities.get(entity));
-		*/
-
 		// TODO: use pooling for nodes
+		// this.pool.release(this.entities.get(entity));
+		
 		this.entities.delete(entity);
 	}
 
@@ -89,7 +75,7 @@ Family.prototype.remove = function remove (entity) {
 };
 
 /**
- * @method has
+ * @method
  * @param {Entity} entity
  * @return {Boolean}
 **/
@@ -98,7 +84,7 @@ Family.prototype.has = function has (entity) {
 };
 
 /**
- * @method match
+ * @method
  * @param {Entity} entity
  * @return {Boolean}
 **/
@@ -112,6 +98,13 @@ Family.prototype.match = function (entity) {
 	return true;
 };
 
+
+/**
+ * @function
+ * @param {Entity} entity
+ * @param {Component} component
+ * @param {Function} componentConstructor
+**/
 function onComponentRemovedFromEntity (entity, component, componentConstructor) {
 	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
 		this.remove(entity);

@@ -1,10 +1,8 @@
-/**
- * @module tombo
-**/
+/** @module tombo/component **/
+
 export default Component;
 
 /**
- * @class Component
- * @constructor
+ * @abstract @class
 **/
 function Component () {}

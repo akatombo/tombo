@@ -1,89 +1,71 @@
+/** @module tombo/entity **/
+
 import inherit from 'inherit';
 import uid from 'uid';
 import Emitter from 'emitter';
 
-// TODO: .removeAll() ?
-// TODO: .getAll() ?
-
-/**
- * @module tombo
-**/
 export default Entity;
 
+// TODO: add .removeAll() ?
+// TODO: add .getAll() ?
+
 /**
- * @class Entity
- * @constructor
+ * @class @extends Emitter
 **/
 function Entity () {
 	/**
-	 * entity unique identifier
-	 *
-	 * @property $id
+	 * The entity unique identifier
 	 * @readonly
 	 * @type {String}
 	**/
 	this.uid = uid();
 
 	/**
-	 * Contains all components attached to the entity
-	 *
-	 * @property components
+	 * List of all entity's components
 	 * @private
 	 * @type {Map}
-	 * @default new Map()
 	**/
 	this.components = new Map();
 }
 
-/**
- * Fired when a component is added
- *
- * @event component:added
- * @param {Entity} entity
- * @param {Component} component
- * @param {Function} componentConstructor
-**/
-
-/**
- * Fired when a component is removed
- *
- * @event component:removed
- * @param {Entity} entity
- * @param {Component} component
- * @param {Function} componentConstructor
-**/
 inherit(Entity, Emitter);
 
 /**
- * Add a component, fire component:added event
+ * Add a component to the entity
  *
- * @method add
- * @chainable
+ * @method
+ * @fires Entity#component:added
  * @param {Component} component
  * @return {Entity}
 **/
 Entity.prototype.add = function add (component) {
-	var componentConstructor = component.constructor;
+	let componentConstructor = component.constructor;
 	this.components.set(componentConstructor, component);
 
+	/**
+	 * @event Entity#component:added
+	**/
 	this.emit('component:added', this, component, componentConstructor);
 
 	return this;
 };
 
 /**
- * Remove a component with his constructor, fire component:removed event
+ * Remove a component with his constructor from the entity
  *
- * @method remove
- * @chainable
+ * @method
+ * @fires Entity#component:removed
  * @param {Function} componentConstructor
  * @return {Entity}
 **/
 Entity.prototype.remove = function remove (componentConstructor) {
 	if (this.components.has(componentConstructor)) {
-		var component = this.components.get(componentConstructor);
+		let component = this.components.get(componentConstructor);
 		this.components.delete(componentConstructor);
 
+		/**
+		 * @event Entity#component:removed
+		**/
 		this.emit('component:removed', this, component, componentConstructor);
 	}
 
@@ -93,7 +75,7 @@ Entity.prototype.remove = function remove (componentConstructor) {
 /**
  * Check if has component with his constructor
  *
- * @method has
+ * @method
  * @param {Function} componentConstructor
  * @return {Boolean}
 **/
@@ -104,9 +86,9 @@ Entity.prototype.has = function has (componentConstructor) {
 /**
  * Get a component with his constructor
  *
- * @method get
+ * @method
  * @param {Function} componentConstructor
- * @return {Component|null}
+ * @return {?Component}
 **/
 Entity.prototype.get = function get (componentConstructor) {
 	return this.components.get(componentConstructor);
