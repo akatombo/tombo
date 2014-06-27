@@ -1,0 +1,9 @@
+{
+  "name": "tombo",
+  "version": "0.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "dox": "^0.4.4"
+  },
+  "scripts": {}
+}
