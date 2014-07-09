@@ -89,7 +89,7 @@ describe("Entity", function () {
 		});
 	});
 
-	describe("#has(componentConstructor)", function () {
+	describe("#get(componentConstructor)", function () {
 		it("should return defined `componentConstructor` instance", function () {
 			tree.add(positionA);
 			tree.get(Position).should.be.equal(positionA);

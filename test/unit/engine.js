@@ -1,7 +1,7 @@
 import Engine from 'tombo/engine.js';
 
 describe("Engine", function () {
-	describe("#run(deltaTime)", function () {
+	describe("#update(deltaTime)", function () {
 		it("...", function () {
 			throw new Error('unimplemented');
 		});
