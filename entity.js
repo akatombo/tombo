@@ -1,10 +1,10 @@
 /** @module tombo/entity **/
 
-import inherit from 'inherit';
-import uid from 'uid';
-import Emitter from 'emitter';
+import inherit from 'inherit'
+import uid from 'uid'
+import Emitter from 'emitter'
 
-export default Entity;
+export default Entity
 
 // TODO: add .removeAll() ?
 // TODO: add .getAll() ?
@@ -18,17 +18,17 @@ function Entity () {
 	 * @readonly
 	 * @type {String}
 	**/
-	this.uid = uid();
+	this.uid = uid()
 
 	/**
 	 * List of all entity's components
 	 * @private
 	 * @type {Map}
 	**/
-	this.components = new Map();
+	this.components = new Map()
 }
 
-inherit(Entity, Emitter);
+inherit(Entity, Emitter)
 
 /**
  * Add a component to the entity
@@ -39,16 +39,16 @@ inherit(Entity, Emitter);
  * @return {Entity}
 **/
 Entity.prototype.add = function add (component) {
-	let componentConstructor = component.constructor;
-	this.components.set(componentConstructor, component);
+	let componentConstructor = component.constructor
+	this.components.set(componentConstructor, component)
 
 	/**
 	 * @event Entity#component:added
 	**/
-	this.emit('component:added', this, component, componentConstructor);
+	this.emit('component:added', this, component, componentConstructor)
 
-	return this;
-};
+	return this
+}
 
 /**
  * Remove a component with his constructor from the entity
@@ -60,17 +60,17 @@ Entity.prototype.add = function add (component) {
 **/
 Entity.prototype.remove = function remove (componentConstructor) {
 	if (this.components.has(componentConstructor)) {
-		let component = this.components.get(componentConstructor);
-		this.components.delete(componentConstructor);
+		let component = this.components.get(componentConstructor)
+		this.components.delete(componentConstructor)
 
 		/**
 		 * @event Entity#component:removed
 		**/
-		this.emit('component:removed', this, component, componentConstructor);
+		this.emit('component:removed', this, component, componentConstructor)
 	}
 
-	return this;
-};
+	return this
+}
 
 /**
  * Check if has component with his constructor
@@ -80,8 +80,8 @@ Entity.prototype.remove = function remove (componentConstructor) {
  * @return {Boolean}
 **/
 Entity.prototype.has = function has (componentConstructor) {
-	return this.components.has(componentConstructor);
-};
+	return this.components.has(componentConstructor)
+}
 
 /**
  * Get a component with his constructor
@@ -91,5 +91,5 @@ Entity.prototype.has = function has (componentConstructor) {
  * @return {?Component}
 **/
 Entity.prototype.get = function get (componentConstructor) {
-	return this.components.get(componentConstructor);
-};
+	return this.components.get(componentConstructor)
+}

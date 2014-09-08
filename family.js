@@ -1,8 +1,8 @@
 /** @module tombo/family **/
 
-import PrototypelessObject from 'prototypeless-object';
+import PrototypelessObject from 'prototypeless-object'
 
-export default Family;
+export default Family
 
 /**
  * @class
@@ -13,14 +13,14 @@ function Family (schema) {
 	 * @type {Map}
 	**/
 	// entity | node
-	this.entities = new Map();
+	this.entities = new Map()
 
 	/**
 	 * @private
 	 * @type {Map}
 	**/
 	// component constructor | property name
-	this.components = new Map();
+	this.components = new Map()
 
 
 	/*
@@ -28,7 +28,7 @@ function Family (schema) {
 	*/
 
 	for (let componentName in schema) {
-		this.components.set(schema[componentName], componentName);
+		this.components.set(schema[componentName], componentName)
 	}
 
 	//TODO: throw error when schema is empty
@@ -42,15 +42,15 @@ function Family (schema) {
 Family.prototype.add = function add (entity) {
 	if (!this.entities.has(entity) && this.match(entity)) {
 		// TODO: use pooling for nodes (concept: https://gist.github.com/wryk/9483867)
-		// var node = this.pool.acquire();
+		// var node = this.pool.acquire()
 
 		let node = new PrototypelessObject();
 		for (let [componentConstructor, componentName] of this.components) {
-			node[componentName] = entity.get(componentConstructor);
+			node[componentName] = entity.get(componentConstructor)
 		}
 
-		entity.on('component:removed', onComponentRemovedFromEntity, this);
-		this.entities.set(entity, node);
+		entity.on('component:removed', onComponentRemovedFromEntity, this)
+		this.entities.set(entity, node)
 	}
 	
 	return this;
@@ -63,12 +63,12 @@ Family.prototype.add = function add (entity) {
 **/
 Family.prototype.remove = function remove (entity) {
 	if (this.entities.has(entity)) {
-		entity.off('component:removed', onComponentRemovedFromEntity, this);
+		entity.off('component:removed', onComponentRemovedFromEntity, this)
 
 		// TODO: use pooling for nodes
-		// this.pool.release(this.entities.get(entity));
+		// this.pool.release(this.entities.get(entity))
 		
-		this.entities.delete(entity);
+		this.entities.delete(entity)
 	}
 
 	return this;
@@ -80,7 +80,7 @@ Family.prototype.remove = function remove (entity) {
  * @return {Boolean}
 **/
 Family.prototype.has = function has (entity) {
-	return this.entities.has(entity);
+	return this.entities.has(entity)
 };
 
 /**
@@ -91,11 +91,11 @@ Family.prototype.has = function has (entity) {
 Family.prototype.match = function (entity) {
 	for (var componentConstructor of this.components.keys()) {
 		if (!entity.has(componentConstructor)) {
-			return false;
+			return false
 		}
 	}
 
-	return true;
+	return true
 };
 
 
@@ -107,6 +107,6 @@ Family.prototype.match = function (entity) {
 **/
 function onComponentRemovedFromEntity (entity, component, componentConstructor) {
 	if (this.entities.has(entity) && this.components.has(componentConstructor)) {
-		this.remove(entity);
+		this.remove(entity)
 	}
 }

@@ -10,7 +10,7 @@ function System () {}
 /**
  * @type {Object}
 **/
-System.prototype.require = {};
+System.prototype.require = {}
 
 /**
  * @abstract @method
@@ -19,4 +19,6 @@ System.prototype.require = {};
  * @param {Map} entities
  * @param {Engine} engine
 **/
-System.prototype.update = function (deltaTime, nodes, entities, engine) {};
+System.prototype.update = function (deltaTime, nodes, entities, engine) {
+	throw new Error("System#update is not overridden")
+}
